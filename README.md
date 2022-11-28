@@ -3,4 +3,4 @@
 npx create-react-app app --template file:.template
 ```
 
-Hopefully this will be a working messaging app for my final project.
+A working clone of IMessage. I hope
