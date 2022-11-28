@@ -1,0 +1,13 @@
+{
+	"build": {
+		"dockerfile": "Dockerfile"
+	},
+	// Uncomment if using podman
+	//"runArgs": ["--userns=keep-id"],
+	// If using podman, change type=bind to type=bind,Z
+	"workspaceMount": "source=${localWorkspaceFolder},target=/workspace/${localWorkspaceFolderBasename},type=bind",
+	"workspaceFolder": "/workspace/${localWorkspaceFolderBasename}",
+
+	"onCreateCommand": "bash .devcontainer/onCreateCommand.sh",
+	"postStartCommand": "bash .devcontainer/postStartCommand.sh"
+}
