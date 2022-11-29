@@ -5,33 +5,37 @@ import './ChatWindow.css'
 
 
 
-function ChatWindow() {
-    let messages = [
-        {
-            text: 'Hello, This is more text',
-            user_id: 2
-        },
-        {
-            text: 'Test, Another test message',
-            user_id: 1
-        },
-        {
-            text: 'Test, Another test message',
-            user_id: 1
-        },
-        {
-            text: 'Test',
-            user_id: 2
-        },
-        {
-            text: 'Test',
-            user_id: 2
-        },
-        {
-            text: 'Test',
-            user_id: 1
-        },
-    ]
+function ChatWindow(props) {
+    // console.log(props.data)
+
+    let messages = props.data
+    let mapKey = 0
+    // let messages = [
+    //     {
+    //         text: 'Hello, This is more text',
+    //         user_id: 2
+    //     },
+    //     {
+    //         text: 'Test, Another test message',
+    //         user_id: 1
+    //     },
+    //     {
+    //         text: 'Test, Another test message',
+    //         user_id: 1
+    //     },
+    //     {
+    //         text: 'Test',
+    //         user_id: 2
+    //     },
+    //     {
+    //         text: 'Test',
+    //         user_id: 2
+    //     },
+    //     {
+    //         text: 'Test',
+    //         user_id: 1
+    //     },
+    // ]
 
     const [value, setValue] = useState('')
     const message = document.getElementById('message')
@@ -49,14 +53,16 @@ function ChatWindow() {
         <div className='container-fluid chatContainer'>
             <div className='chatWindow d-flex align-items-end row'>
                     {messages.map((item) => {
+                        mapKey += 1
+                        // console.log(item.user_id.id)
                         let messageClass = 'sent'
-                        if (item.user_id !== 1){
+                        if (item.user_id.id !== props.user){
                             messageClass = 'received'
                         }
                         return (
-                            <div className='chatBody row'>
-                                <div className='messageContainer p-1'>
-                                    <div className={messageClass}>{item.text}</div>
+                            <div key={mapKey} className='chatBody row w-100'>
+                                <div className={' messageContainer p-1 vw-100'}>
+                                    <p className={messageClass}>{item.text}</p>
                                 </div>
                             </div>
                         )
