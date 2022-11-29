@@ -1,5 +1,6 @@
 import React from 'react'
 import ChatWindow from './ChatWindow';
+import HeaderNav from './HeaderNav';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
@@ -20,7 +21,7 @@ export default function App() {
                     // , 1000)
             }
             getData()
-            setInterval(getData, 1000)
+            // setInterval(getData, 1000)
         }, []);
     // }
 // setInterval(Data(), 1000)
@@ -38,6 +39,7 @@ export default function App() {
     const [page, setPage] = useState('ChatWindow')
     return (
         <>
+            <HeaderNav />
             {page === 'ChatWindow' && <ChatWindow data={data} user={user} post={postData}/>}
         </>
     )

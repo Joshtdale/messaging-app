@@ -7,7 +7,7 @@
 
 .chatWindow {
     /* height: 95vh; */
-    align-content: flex-end;
+    /* align-content: flex-end; */
     overflow: scroll;
 }
 
@@ -24,7 +24,7 @@
     width: 95vw;
     padding: 2vw;
     color: white;
-    border: 1px solid grey;
+    border: 1px solid #8e8e93;
 }
 
 .messageContainer {
@@ -34,10 +34,12 @@
 .sent {
     background-color: #007aff;
     /* margin-left: 75%;/ */
+    /* flex-direction: row-reverse; */
+    margin-left: auto;
 }
 
 .received {
-    background-color: grey;
+    background-color: #69696d;
     margin-left: 1%;
 }
 
