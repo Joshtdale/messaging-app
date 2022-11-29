@@ -19,7 +19,7 @@
 }
 
 .messageInput {
-    background-color: transparent;
+    background-color: rgba(0, 0, 0, 0.973);
     border-radius: 20px;
     width: 95vw;
     padding: 2vw;

@@ -8,34 +8,34 @@ import './ChatWindow.css'
 function ChatWindow(props) {
     // console.log(props.data[0])
 
-    // let messages = props.data
+    let messages = props.data
     let mapKey = 0
-    let messages = [
-        {
-            text: 'Hello, This is more textHello, This is more textHello, This is more textHello, This is more textHello, This is more textHello, This is more textHello, This is more textHello, This is more textHello, This is more textHello, This is more textHello, This is more text',
-            user: 2
-        },
-        {
-            text: 'Test, Another test message',
-            user: 1
-        },
-        {
-            text: 'Test, Another test message',
-            user: 1
-        },
-        {
-            text: 'Test',
-            user: 2
-        },
-        {
-            text: 'TestHello, This is more textHello, This is more textHello, This is more textHello, This is more textHello, This is more text',
-            user: 2
-        },
-        {
-            text: 'Hello, This is more textHello, This is more textHello, This is more textHello, This is more textHello, This is more textHello, This is more textHello, This is more textHello, This is more text',
-            user: 1
-        },
-    ]
+    // let messages = [
+    //     {
+    //         text: 'Hello, This is more textHello, This is more textHello, This is more textHello, This is more textHello, This is more textHello, This is more textHello, This is more textHello, This is more textHello, This is more textHello, This is more textHello, This is more text',
+    //         user: 2
+    //     },
+    //     {
+    //         text: 'Test, Another test message',
+    //         user: 1
+    //     },
+    //     {
+    //         text: 'Test, Another test message',
+    //         user: 1
+    //     },
+    //     {
+    //         text: 'Test',
+    //         user: 2
+    //     },
+    //     {
+    //         text: 'TestHello, This is more textHello, This is more textHello, This is more textHello, This is more textHello, This is more text',
+    //         user: 2
+    //     },
+    //     {
+    //         text: 'Hello, This is more textHello, This is more textHello, This is more textHello, This is more textHello, This is more textHello, This is more textHello, This is more textHello, This is more text',
+    //         user: 1
+    //     },
+    // ]
 
     const [value, setValue] = useState('')
     const message = document.getElementById('message')

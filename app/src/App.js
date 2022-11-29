@@ -21,7 +21,7 @@ export default function App() {
                     // , 1000)
             }
             getData()
-            // setInterval(getData, 1000)
+            setInterval(getData, 1000)
         }, []);
     // }
 // setInterval(Data(), 1000)

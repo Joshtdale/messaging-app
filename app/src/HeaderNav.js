@@ -6,7 +6,7 @@ function HeaderNav() {
     return (
         <div className='row headerNav'>
             <div className="col">
-                {/* <img className='backButton' src={BackButton} alt="back" /> */}
+                <img className='backButton' src={BackButton} alt="back" />
             </div>
         </div>
     )
