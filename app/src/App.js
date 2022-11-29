@@ -39,7 +39,9 @@ export default function App() {
     const [page, setPage] = useState('ChatWindow')
     return (
         <>
+        <nav className='fixed-top'>
             <HeaderNav />
+        </nav>
             {page === 'ChatWindow' && <ChatWindow data={data} user={user} post={postData}/>}
         </>
     )

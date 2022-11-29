@@ -1,8 +1,8 @@
 .chatContainer {
-    background-color: black;
+    /* background-color: black; */
     height: 100vh;
     width: 100vw;
-    color: white;
+    color: #FFFEFD;
 }
 
 .chatWindow {
