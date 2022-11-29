@@ -6,7 +6,7 @@ import './ChatWindow.css'
 
 
 function ChatWindow(props) {
-    // console.log(props.data)
+    // console.log(props.data[0])
 
     let messages = props.data
     let mapKey = 0
@@ -42,8 +42,8 @@ function ChatWindow(props) {
 
     function handleKeyDown(event){
         if (event.key === 'Enter') {
-            console.log(value)
-            // messages.push(value)
+            props.post(value)
+            // console.log(value)
             message.value = ''
             // console.log(messages)
         }
@@ -54,9 +54,9 @@ function ChatWindow(props) {
             <div className='chatWindow d-flex align-items-end row'>
                     {messages.map((item) => {
                         mapKey += 1
-                        // console.log(item.user_id.id)
+                        // console.log(item.user.id)
                         let messageClass = 'sent'
-                        if (item.user_id.id !== props.user){
+                        if (item.user !== props.user){
                             messageClass = 'received'
                         }
                         return (

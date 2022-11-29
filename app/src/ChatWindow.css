@@ -6,8 +6,9 @@
 }
 
 .chatWindow {
-    height: 95vh;
+    /* height: 95vh; */
     align-content: flex-end;
+    overflow: scroll;
 }
 
 .chatBody {
@@ -21,23 +22,28 @@
     background-color: transparent;
     border-radius: 20px;
     width: 95vw;
+    padding: 2vw;
     color: white;
+    border: 1px solid grey;
 }
 
-/* .messageContainer {
+.messageContainer {
     width: 80%;
-} */
+}
 
 .sent {
     background-color: #007aff;
+    /* margin-left: 75%;/ */
 }
 
 .received {
     background-color: grey;
+    margin-left: 1%;
 }
 
-.sent, .received, .messageInput{
+.sent, .received{
     border-radius: 20px;
     padding: 2vw;
+    width: fit-content;
 
 }
