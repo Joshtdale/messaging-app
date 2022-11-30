@@ -1,13 +1,15 @@
 import React from 'react'
 import './HomeNav.css'
 import createButton from './images/create.png'
+import BackButton from './images/thenounproject.png'
 
 
-function HomeNav() {
+function HomeNav(props) {
     return (
-        <div className='row vw-100'>
+        <div className='row homeNavRow vw-100'>
             <div className="col text-center mt-1">
-                <button className='editButton btn'>Edit</button>
+            {props.page !== 'options' && <button onClick={() => props.setPage('options')} className='editButton btn'>Edit</button>}
+                {props.page === 'options' && <img onClick={() => props.setPage('Home')} className='backButton' src={BackButton} alt="back" />}
                 {/* <div className="dropdown mb-3">
                     <div
                         className="btn btn-secondary dropdown-toggle"

@@ -60,7 +60,7 @@ function ChatWindow(props) {
 
     function handleKeyDown(event){
         if (event.key === 'Enter') {
-            props.post(value)
+            props.post(value, props.page)
             // console.log(value)
             message.value = ''
             // console.log(messages)
@@ -68,7 +68,7 @@ function ChatWindow(props) {
     };
 
      useEffect(() => { //https://bobbyhadz.com/blog/react-scroll-to-bottom
-        // bottomRef.current?.scrollIntoView({behavior: 'smooth'});
+        bottomRef.current?.scrollIntoView({behavior: 'smooth'});
     }, [messages]);
 
     // does messages in start = socket messages
