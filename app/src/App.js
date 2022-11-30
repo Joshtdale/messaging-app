@@ -10,7 +10,7 @@ const user = 1
 
 export default function App() {
 
-    
+
 
     const [data, setData] = useState([]);
     // function Data(){
@@ -18,20 +18,27 @@ export default function App() {
         async function getData() {
             const response = await axios.get(APIUrl)
             setData(response.data)
-                // console.log(response.data)
+            // console.log(response.data)
 
-            getData()
         }
-        setInterval(getData, 1000)
+        getData()
+        // setInterval(getData, 1000)
     }, []);
-    // }
-    // setInterval(Data(), 1000)
+
 
     function postData(value) {
+        const time = new Date()
+        var idTime = time.getTime()
         axios.post(APIUrl, {
 
             "text": value,
-            "user": user
+            "user": {
+                "id": user
+            },
+            "chat": {
+                "id": 1
+            },
+            "timestamp": idTime
         })
 
     }
@@ -44,7 +51,7 @@ export default function App() {
             {page !== 'Home' && <nav className='fixed-top'>
                 <HeaderNav setPage={setPage} />
             </nav>}
-            {page === 'ChatWindow' && <ChatWindow data={data} user={user} post={postData} />}
+            {page === 'ChatWindow' && <div className='mt-5 pt-5'> <ChatWindow data={data} user={user} post={postData} /> </div>}
         </>
     )
 }

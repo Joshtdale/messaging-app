@@ -9,6 +9,8 @@ function ChatWindow(props) {
 
 
     let messages = props.data
+    let filteredMessages = messages.filter((item) => item.chat.id === 2)
+    console.log(filteredMessages)
     let mapKey = 0
     // let messages = [
     //     {
@@ -66,19 +68,21 @@ function ChatWindow(props) {
     };
 
      useEffect(() => { //https://bobbyhadz.com/blog/react-scroll-to-bottom
-        bottomRef.current?.scrollIntoView({behavior: 'smooth'});
+        // bottomRef.current?.scrollIntoView({behavior: 'smooth'});
     }, [messages]);
+
+    // does messages in start = socket messages
 
     return (
         <div className='container-fluid chatContainer'>
             <div id='chat' className='chatWindow d-flex align-items-end justify-content-center row'>
     
-                    {messages.map((item) => {
+                    {filteredMessages.map((item) => {
                         mapKey += 1
                         // console.log(item.user.id)
                         let messageClass = 'sent'
                         let sentRec = 'd-flex flex-row-reverse'
-                        if (item.user !== props.user){
+                        if (item.user.id !== props.user){
                             messageClass = 'received'
                             sentRec = ''
                             
