@@ -8,6 +8,7 @@
 .chatWindow {
     /* height: 95vh; */
     /* align-content: flex-end; */
+    max-height: 95vh;
     overflow: scroll;
 }
 

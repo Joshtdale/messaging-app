@@ -1,0 +1,9 @@
+.editButton {
+    color: #007aff !important;
+    align-items: center;
+}
+
+.createBtn {
+    height: 5vh;
+    /* background-image: url('./images/create.png'); */
+}
