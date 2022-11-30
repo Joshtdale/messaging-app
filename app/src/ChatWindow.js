@@ -1,12 +1,12 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import './ChatWindow.css'
 
 
-
-
 function ChatWindow(props) {
-    // console.log(props.data[0])
+    const bottomRef = useRef(null);
+
+
 
     let messages = props.data
     let mapKey = 0
@@ -17,6 +17,22 @@ function ChatWindow(props) {
     //     },
     //     {
     //         text: 'Test, Another test message',
+    //         user: 1
+    //     },
+    //     {
+    //         text: 'Test, Another test message',
+    //         user: 1
+    //     },
+    //     {
+    //         text: 'Test',
+    //         user: 2
+    //     },
+    //     {
+    //         text: 'TestHello, This is more textHello, This is more textHello, This is more textHello, This is more textHello, This is more text',
+    //         user: 2
+    //     },
+    //     {
+    //         text: 'Hello, This is more textHello, This is more textHello, This is more textHello, This is more textHello, This is more textHello, This is more textHello, This is more textHello, This is more text',
     //         user: 1
     //     },
     //     {
@@ -49,9 +65,14 @@ function ChatWindow(props) {
         }
     };
 
+     useEffect(() => { //https://bobbyhadz.com/blog/react-scroll-to-bottom
+        bottomRef.current?.scrollIntoView({behavior: 'smooth'});
+    }, [messages]);
+
     return (
         <div className='container-fluid chatContainer'>
-            <div className='chatWindow d-flex align-items-end justify-content-center row'>
+            <div id='chat' className='chatWindow d-flex align-items-end justify-content-center row'>
+    
                     {messages.map((item) => {
                         mapKey += 1
                         // console.log(item.user.id)
@@ -70,6 +91,7 @@ function ChatWindow(props) {
                             </div>
                         )
                     })}
+                    <div ref={bottomRef} />
                 </div>
                 <div className='row fixed-bottom'>
                     <div className="col d-flex justify-content-center m-2">
