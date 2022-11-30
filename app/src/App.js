@@ -44,6 +44,7 @@ export default function App() {
     }
 
 
+    // const [filter, setFilter] = useState('')
     const [page, setPage] = useState('Home')
     return (
         <>
@@ -51,7 +52,7 @@ export default function App() {
             {page !== 'Home' && <nav className='fixed-top'>
                 <HeaderNav setPage={setPage} />
             </nav>}
-            {page === 'ChatWindow' && <div className='mt-5 pt-5'> <ChatWindow data={data} user={user} post={postData} /> </div>}
+            {page !== 'Home' && <div className='mt-5 pt-5'> <ChatWindow data={data} user={user} post={postData} page={page} /> </div>}
         </>
     )
 }

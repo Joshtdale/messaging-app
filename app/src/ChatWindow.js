@@ -9,8 +9,8 @@ function ChatWindow(props) {
 
 
     let messages = props.data
-    let filteredMessages = messages.filter((item) => item.chat.id === 2)
-    console.log(filteredMessages)
+    let filteredMessages = messages.filter((item) => item.chat.name === props.page)
+    // console.log(filteredMessages)
     let mapKey = 0
     // let messages = [
     //     {

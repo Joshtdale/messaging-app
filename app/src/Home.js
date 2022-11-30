@@ -19,24 +19,30 @@ let chats = [
 ]
 
 function Home(props) {
+    let chats = props.data
+    let uniqueChats = chats.map(item => item.chat.name).filter((value, index, self) => self.indexOf(value) === index)
+    console.log(uniqueChats)
+    
+
+
     return (
         <div className='container-fluid'>
             <div className="row justify-content-center">
                 <div className="col">
-                <HomeNav />
+                    <HomeNav />
                 </div>
-                {chats.map((item) => {
+                {uniqueChats.map((item) => {
                     count += 1
                     return (
-                    <div key={count} className="row">
-                        <div onClick={() => props.setPage('ChatWindow')} className="col d-flex align-items-center justify-content-center groupChats">
-                            <div className='text-center'>{item.name}</div>
+                        <div key={count} className="row">
+                            <div onClick={() => props.setPage(item)} className="col d-flex align-items-center justify-content-center groupChats">
+                                <div className='text-center'>{item}</div>
+                            </div>
                         </div>
-                    </div>
                     )
                 })}
             </div>
-            
+
         </div>
     )
 }
