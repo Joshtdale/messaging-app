@@ -28,7 +28,7 @@ function Home(props) {
         <div className='container-fluid'>
             <div className="row justify-content-center">
                 <div className="col">
-                    <HomeNav setPage={setPage} page={page}/>
+                    <HomeNav setPage={setPage} page={page} post={props.post}/>
                 </div>
                 <div className="row">
                     <div className="col">
@@ -39,7 +39,7 @@ function Home(props) {
                     count += 1
                     return (
                         <div key={count} className="row">
-                            <div onClick={() => props.setPage(item.name)} className="col d-flex align-items-center justify-content-center groupChats">
+                            <div onClick={() => props.setPage(item.id)} className="col d-flex align-items-center justify-content-center groupChats">
                                 {page === 'options' && <button className='btn fs-2'>⛔️</button>}
                                 <div className='text-center'>{item.name}</div>
                             </div>

@@ -9,7 +9,7 @@ function ChatWindow(props) {
 
 
     let messages = props.data
-    let filteredMessages = messages.filter((item) => item.chat.name === props.page)
+    let filteredMessages = messages.filter((item) => item.chat.id === props.page)
     // console.log(filteredMessages)
     let mapKey = 0
     // let messages = [
@@ -60,7 +60,7 @@ function ChatWindow(props) {
 
     function handleKeyDown(event){
         if (event.key === 'Enter') {
-            props.post(value, props.page)
+            props.post('message', value, props.page)
             // console.log(value)
             message.value = ''
             // console.log(messages)
@@ -70,7 +70,7 @@ function ChatWindow(props) {
      useEffect(() => { //https://bobbyhadz.com/blog/react-scroll-to-bottom
         bottomRef.current?.scrollIntoView({behavior: 'smooth'});
     }, [messages]);
-
+    //useMemo
     // does messages in start = socket messages
 
     return (
