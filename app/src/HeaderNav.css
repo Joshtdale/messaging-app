@@ -7,3 +7,12 @@
 .backButton {
     height: 5vh;
 }
+
+#renameInput {
+background-color: rgba(0, 0, 0, 0.973);
+    border-radius: 20px;
+    /* width: 95vw; */
+    padding: 2vw;
+    color: white;
+    border: 1px solid #8e8e93;
+}
