@@ -2,6 +2,7 @@ import React from 'react'
 import { useState } from 'react'
 import HomeNav from './HomeNav'
 import './Home.css'
+import xButton from './images/x.png'
 
 let count = 0
 
@@ -14,7 +15,7 @@ function Home(props) {
     const [value, setValue] = useState('')
     const input = document.getElementById('input')
 
-    function handleKeyDown(event){
+    function handleKeyDown(event) {
         if (event.key === 'Enter') {
             // props.post(value)
             console.log(value)
@@ -28,20 +29,28 @@ function Home(props) {
         <div className='container-fluid'>
             <div className="row justify-content-center">
                 <div className="col">
-                    <HomeNav setPage={setPage} page={page} post={props.post}/>
+                    <HomeNav setPage={setPage} page={page} post={props.post} />
                 </div>
                 <div className="row">
-                    <div className="col">
-                    <input id='input' placeholder='Search' className='messageInput' onKeyDown={(event) => handleKeyDown(event)} onChange={(e) => setValue(e.target.value)} />
+                    <div className="col d-flex justify-content-center">
+                        <input id='input' placeholder='Search' className='searchBox' onKeyDown={(event) => handleKeyDown(event)} onChange={(e) => setValue(e.target.value)} />
                     </div>
                 </div>
                 {chats.map((item) => {
                     count += 1
                     return (
                         <div key={count} className="row">
-                            <div onClick={() => props.setPage(item.id)} className="col d-flex align-items-center justify-content-center groupChats">
-                                {page === 'options' && <button className='btn fs-2'>⛔️</button>}
-                                <div className='text-center'>{item.name}</div>
+                            <div className="col d-flex align-items-center justify-content-center groupChats">
+                                {/* <div className="row"> */}
+                                    {/* <div className="col-2"> */}
+                                    {/* </div> */}
+                                    {/* <div className="col-8"> */}
+                                        <div onClick={() => props.setPage(item.id)} className='text-center btn text-light'>{item.name}</div>
+                                    {/* </div> */}
+                                    {/* <div className="col-2"> */}
+                                        {page === 'options' && <img onClick={() => props.post('delete','', item.id)} className='btn chatDelete' src={xButton} alt="X" />}
+                                    {/* </div> */}
+                                {/* </div> */}
                             </div>
                         </div>
                     )

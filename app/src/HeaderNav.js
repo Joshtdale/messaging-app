@@ -33,7 +33,7 @@ function HeaderNav(props) {
             </div>
             <div className="col-3 text-center">
                 {name !== 'rename' && <img onClick={() => setName('rename')} className='backButton' src={iButton} alt="i" />}
-                {name === 'rename' && <img onClick={() => setName('cancel')} className='backButton' src={xButton} alt="i" />}
+                {name === 'rename' && <img onClick={() => setName('cancel')} className='backButton' src={xButton} alt="X" />}
             </div>
         </div>
     )

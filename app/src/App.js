@@ -13,7 +13,7 @@ export default function App() {
     const [chat, setChat] = useState([])
     const [page, setPage] = useState('Home')
 
-    useEffect(() => {
+    useEffect(() => { // GET Axios call 📞
         async function getData() {
             const response = await axios.get(APIUrl + 'messages/')
             const chatList = await axios.get(APIUrl + 'chats/')
@@ -23,16 +23,16 @@ export default function App() {
             // console.log(chatList.data)
         }
         getData()
-        // setInterval(getData, 1000)
+        setInterval(getData, 1000)
     }, []);
 
 
 
 
-    function postData(type, text, chat) {
+    function postData(type, text, chat) {// Master CRUD function
         const time = new Date()
         var idTime = time.getTime()
-        if (type === 'message') {
+        if (type === 'message') {// Message post
             axios.post(APIUrl + 'messages/', {
 
                 "text": text,
@@ -44,45 +44,45 @@ export default function App() {
                 },
                 "timestamp": idTime
             })
-        } else if (type === 'chat') {
+        } else if (type === 'chat') {// Chat update/put name
             axios.put(APIUrl + 'chats/' + page + '/', {
                 "name": text
             })
-        } else if (type === 'create-chat'){
+        } else if (type === 'create-chat') {// Chat create/post
             axios.post(APIUrl + 'chats/', {
                 "name": text
             })
+        } else if (type === 'delete') {// Chat Delete 🧨🧨
+            axios.delete(APIUrl + 'chats/' + chat)
         }
-        }
+    }
 
-
-    // const [filter, setFilter] = useState('')
     return (
         <>
-            {page === 'Home' && 
-            <Home 
-            data={chat} 
-            setPage={setPage} 
-            post={postData} 
-            />}
+            {page === 'Home' &&
+                <Home
+                    data={chat}
+                    setPage={setPage}
+                    post={postData}
+                />}
 
-            {page !== 'Home' && 
-            <nav className='fixed-top'>
-            <HeaderNav 
-            setPage={setPage} 
-            page={page} 
-            chatData={chat} 
-            post={postData}/>
-            </nav>}
+            {page !== 'Home' &&
+                <nav className='fixed-top'>
+                    <HeaderNav
+                        setPage={setPage}
+                        page={page}
+                        chatData={chat}
+                        post={postData} />
+                </nav>}
 
-            {page !== 'Home' && 
-            <div className='mt-5 pt-5'> 
-            <ChatWindow 
-            data={data} 
-            user={user} 
-            post={postData} 
-            page={page}/> 
-            </div>}
+            {page !== 'Home' &&
+                <div className='mt-5 pt-5'>
+                    <ChatWindow
+                        data={data}
+                        user={user}
+                        post={postData}
+                        page={page} />
+                </div>}
         </>
     )
 }

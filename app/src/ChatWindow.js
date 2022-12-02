@@ -98,7 +98,7 @@ function ChatWindow(props) {
                     <div ref={bottomRef} />
                 </div>
                 <div className='row fixed-bottom'>
-                    <div className="col d-flex justify-content-center m-2">
+                    <div className="col d-flex justify-content-center m-2 pl-0">
                         <input id='message' placeholder='iMessage' className='messageInput' onKeyDown={(event) => handleKeyDown(event)} onChange={(e) => setValue(e.target.value)} />
                     </div>
                 </div>
