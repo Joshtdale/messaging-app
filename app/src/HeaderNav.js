@@ -28,7 +28,7 @@ function HeaderNav(props) {
                 <img onClick={() => props.setPage('Home')} className='backButton mx-4' src={BackButton} alt="back" />
             </div>
             <div className="col-6 text-center">
-                {name !== 'rename' && <div>{chatObj[0].name}</div>}
+                {name !== 'rename' && <div onDoubleClick={() => setName('rename')}>{chatObj[0].name}</div>}
                 {name === 'rename' && <input id='renameInput' placeholder={chatObj[0].name} onKeyDown={(event) => handleKeyDown(event)} onChange={(e) => setValue(e.target.value)} />}
             </div>
             <div className="col-3 text-center">

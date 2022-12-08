@@ -1,5 +1,8 @@
 {
   "dependencies": {
-    "axios": "^1.2.0"
+    "axios": "^1.2.0",
+    "fs": "npm:file-system@^2.2.2",
+    "path": "npm:path-browserify@^1.0.1",
+    "react-app-rewired": "^2.2.1"
   }
 }

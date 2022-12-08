@@ -1,6 +1,7 @@
 import React from 'react'
 import './HomeNav.css'
 import createButton from './images/create.png'
+import addFriends from './images/addFriends.png'
 import BackButton from './images/thenounproject.png'
 
 
@@ -18,7 +19,8 @@ function HomeNav(props) {
                 </div>
 
                 <div className="col text-center createBtn">
-                    <img onClick={() => props.post('create-chat', 'New chat')} className='createBtn btn' src={createButton} alt='Create'></img>
+                    {props.page !== 'options' && <img onClick={() => props.post('create-chat', 'New chat')} className='createBtn btn' src={createButton} alt='Create'></img>}
+                    {props.page !== 'options' && <img onClick={() => props.post('create-chat', 'New chat')} className='createBtn btn' src={addFriends} alt='Add friends'></img>}
                 </div>
 
             </div>

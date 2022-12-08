@@ -1,12 +1,10 @@
 // import React from 'react'
 import { React, useState, useRef, useEffect } from 'react'
 import './ChatWindow.css'
-
+import Pusher from 'pusher-js';
 
 function ChatWindow(props) {
     const bottomRef = useRef(null);
-
-
 
     let messages = props.data
     let filteredMessages = messages.filter((item) => item.chat.id === props.page)
@@ -67,11 +65,33 @@ function ChatWindow(props) {
         }
     };
 
-     useEffect(() => { //https://bobbyhadz.com/blog/react-scroll-to-bottom
+    useEffect(() => { //https://bobbyhadz.com/blog/react-scroll-to-bottom
         bottomRef.current?.scrollIntoView({behavior: 'smooth'});
     }, [messages]);
     //useMemo
     // does messages in start = socket messages
+
+    useEffect(() => {
+		const pusher = new Pusher(process.env.REACT_APP_PUSHER_ENV, {
+			cluster: process.env.REACT_APP_CLUSTER
+		})
+		const channel1 = pusher.subscribe(process.env.REACT_APP_PUSHER_CHANNEL);
+		// You can bind more channels here like this
+		// const channel2 = pusher.subscribe('channel_name2')
+		channel1.bind(`chat_group_${props.page}`,function(data) {
+		    console.log(data)
+		    // Code that runs when channel1 listens to a new message
+            props.addMessage(data);
+		})
+
+        console.log(channel1)
+		
+		return (() => {
+			pusher.unsubscribe(process.env.REACT_APP_PUSHER_CHANNEL)
+			// pusher.unsubscribe('channel_name2')
+		})
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
     return (
         <div className='container-fluid chatContainer'>
