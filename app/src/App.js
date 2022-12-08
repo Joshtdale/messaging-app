@@ -11,7 +11,8 @@ import Pusher from 'pusher-js';
 // import { GlobalProvider } from './context/GlobalState';
 // import NavBar from './components/NavBar';
 // import NavBar  from './componets'
-import { Login, Profile, Register }  from './componets/user'
+// import { Login, Profile, Register }  from './componets/user'
+import Login from './componets/user/Login';
 
 const APIUrl = 'https://8000-joshtdale-messagingappb-fkhldm7b4nl.ws-us78.gitpod.io/api/'
 const user = 1
