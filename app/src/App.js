@@ -8,11 +8,11 @@ import axios from 'axios';
 // import pusher from 'pusher'
 import Pusher from 'pusher-js';
 // import { Outlet } from "react-router-dom";
-// import { GlobalProvider } from './context/GlobalState';
+import { GlobalProvider } from './context/GlobalState';
 // import NavBar from './components/NavBar';
 // import NavBar  from './componets'
 // import { Login, Profile, Register }  from './componets/user'
-import Login from './componets/user/Login';
+import Login from './components/user/Login';
 
 const APIUrl = 'https://8000-joshtdale-messagingappb-fkhldm7b4nl.ws-us78.gitpod.io/api/'
 const user = 1
@@ -20,115 +20,7 @@ const user = 1
 
 
 
-// class App extends Component {
-//     constructor(props) {
-//         super(props);
-//         this.state = {
-//             text: '',
-//             username: '',
-//             chats: []
-//         };
-//     }
 
-//     componentDidMount() {
-//         const username = window.prompt('Username: ', 'Anonymous');
-//         this.setState({ username });
-//         const pusher = new Pusher('1fb64f027f5f40e81a79', {
-//             cluster: 'us2',
-//             encrypted: true
-//         });
-//         const channel = pusher.subscribe('chat');
-//         channel.bind('message', data => {
-//             this.setState({ chats: [...this.state.chats, data], test: '' });
-//         });
-//         this.handleTextChange = this.handleTextChange.bind(this);
-//     }
-
-//     handleTextChange(e) {
-//         if (e.keyCode === 13) {
-//             // const payload = {
-//             // username: this.state.username,
-//             // "text": this.state.text,
-//             // "user": {
-//             //     "id": user
-//             // }
-//             // "text": text,
-//             //                 "user": {
-//             //                     "id": user
-//             //                 },
-//             //                 "chat": {
-//             //                     "id": chat
-//             //                 },
-//             //                 "timestamp": idTime
-//             // };
-//             console.log(this.state.text, user)
-//             let text = this.state.text
-//             axios.post(APIUrl + 'messages/', {
-
-//                 "text": text,
-//                 "user": {
-//                     "id": user
-//                 },
-//                 "chat": {
-//                     "id": 1
-//                 }
-//                 // "timestamp": idTime
-//             })
-//         } else {
-//             this.setState({ text: e.target.value });
-//         }
-//     }
-
-//     render() {
-//         return (
-//             <div className="App">
-//                 <header className="App-header">
-//                     <img src={logo} className="App-logo" alt="logo" />
-//                     <h1 className="App-title">Welcome to React-Pusher Chat</h1>
-//                 </header>
-//                 <section>
-//                     <ChatList chats={this.state.chats} />
-//                     <ChatBox
-//                         text={this.state.text}
-//                         username={this.state.username}
-//                         handleTextChange={this.handleTextChange}
-//                     />
-//                 </section>
-//             </div>
-//         );
-//     }
-// }
-
-// export default App;
-
-// export default App() {
-//     data() {
-//         return {
-//             username: 'username',
-//             message: '',
-//             messages: []
-//         }
-//     },
-//     mounted() {
-//         Pusher.logToConsole = true;
-//         const pusher = new Pusher('', {
-//             cluster: ''
-//         });
-//         const channel = pusher.subscribe('chat');
-//         channel.bind('message', data => {
-//             this.messages.push(data);
-//         });
-//     },
-//     methods: {
-//         async submit() {
-//             await this.$axios.post('http://localhost:8000/api/messages', {
-//                 username: this.username,
-//                 message: this.message
-//             });
-//             this.message = '';
-//         }
-//     }
-// }
 
 
 export default function App() {
@@ -228,10 +120,8 @@ export default function App() {
 
     return (
         <>
-            {/* {page === 'Login' && */}
-                <Login/>
-
-            {/* {page === 'Home' &&
+        <GlobalProvider>
+            {page === 'Home' &&
                 <Home
                     data={chat}
                     setPage={setPage}
@@ -255,7 +145,8 @@ export default function App() {
                         post={postData}
                         page={page}
                         addMessage={addMessage} />
-                </div>} */}
+                </div>}
+        </GlobalProvider>
         </>
     )
 }

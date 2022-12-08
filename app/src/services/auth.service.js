@@ -4,7 +4,7 @@ import {
     REGISTER_ENDPOINT,
 } from './auth.constants'
 
-import request from "./api.request";
+import request from './api.request';
 
 class AuthService {
     constructor() {
