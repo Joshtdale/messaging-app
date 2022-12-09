@@ -1,8 +1,14 @@
 import { Link } from "react-router-dom";
 import { useGlobalState } from "../context/GlobalState";
 
-function NavBar() {
+function NavBar(props) {
     const [state, dispatch] = useGlobalState();
+    // if (state.currentUser){
+    //     console.log(state.currentUser.user_id)
+    // } else if (!state.currentUser) {
+    //     // let user = 1
+    //     console.log('no user')
+    // }
 
     return (
         <nav>
