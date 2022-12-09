@@ -14,8 +14,8 @@ import { GlobalProvider } from './context/GlobalState';
 // import { Login, Profile, Register }  from './componets/user'
 import request from './services/api.request'
 
-const APIUrl = 'https://8000-joshtdale-messagingappb-fkhldm7b4nl.ws-us78.gitpod.io/api/'
-const user = 1
+// const APIUrl = 'https://8000-joshtdale-messagingappb-fkhldm7b4nl.ws-us78.gitpod.io/api/'
+// const user = 1
 
 
 
@@ -31,6 +31,17 @@ export default function App() {
 
     useEffect(() => { // GET Axios call 📞
         async function getData() {
+            let options = {
+                url: '/messages',
+                method: 'GET',
+                data: { // gets sent in the body of the request
+                    key: '',
+                    otherKey: '',
+                }
+            }
+            let resp = await request(options)
+            setData(resp.data)
+            console.log(resp.data)
             // const response = await axios.get(APIUrl + 'messages/')
             // //Filter by user in url to return chats and messages - in the future
             // const chatList = await axios.get(APIUrl + 'chats/')
@@ -41,35 +52,53 @@ export default function App() {
             // setFriends(friendList.data)
             // // console.log(response.data)
             // console.log(friendList.data)
+
         }
         getData()
         // setInterval(getData, 1000)
+
+        async function getChat() {
+            let options = {
+                url: '/chats',
+                method: 'GET',
+                data: { // gets sent in the body of the request
+                    key: '',
+                    otherKey: '',
+                }
+            }
+            let resp = await request(options)
+            setChat(resp.data)
+            console.log(resp.data)
+
+        }
+        getChat()
+
     }, []);
 
     useEffect(() => {
         console.log("connecting to pusher " + '1fb64f027f5f40e81a79');
-		const pusher = new Pusher('1fb64f027f5f40e81a79', {
-			cluster: 'us2'
-		})
-        
-		const channel1 = pusher.subscribe('imclone_channel');
-		// You can bind more channels here like this
-		// const channel2 = pusher.subscribe('channel_name2')
-		// channel1.bind(`chat_group_${props.page}`,function(data) {
-        channel1.bind(`chat_group_1`,function(data) {
-		    console.log(data)
-		    // Code that runs when channel1 listens to a new message
+        const pusher = new Pusher('1fb64f027f5f40e81a79', {
+            cluster: 'us2'
+        })
+
+        const channel1 = pusher.subscribe('imclone_channel');
+        // You can bind more channels here like this
+        // const channel2 = pusher.subscribe('channel_name2')
+        // channel1.bind(`chat_group_${props.page}`,function(data) {
+        channel1.bind(`chat_group_1`, function (data) {
+            console.log(data)
+            // Code that runs when channel1 listens to a new message
             //props.addMessage(data);
-		})
+        })
 
         console.log(channel1);
-		
-		return (() => {
-			pusher.unsubscribe('imclone_channel')
-			// pusher.unsubscribe('channel_name2')
-		})
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+
+        return (() => {
+            pusher.unsubscribe('imclone_channel')
+            // pusher.unsubscribe('channel_name2')
+        })
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     // // useEffect(() => {
     //     const channel = pusher.subscribe('chat-channel');
@@ -87,66 +116,68 @@ export default function App() {
 
     //     })
     // // }, []);
-    function addMessage(data){
+    function addMessage(data) {
         // todo: create an object out of data, append the obj to the messages in state
+        // getData()
     }
 
-    function postData(type, text, chat) {// Master CRUD function
-        const time = new Date()
-        var idTime = time.getTime()
-        if (type === 'message') {// Message post
-            axios.post(APIUrl + 'messages/', {
-                "id": idTime,
-                "text": text,
-                "user": {
-                    "id": user
-                },
-                "chat": {
-                    "id": 1
-                },
-            })
-        } else if (type === 'chat') {// Chat update/put name
-            axios.put(APIUrl + 'chats/' + page + '/', {
-                "name": text
-            })
-        } else if (type === 'create-chat') {// Chat create/post
-            axios.post(APIUrl + 'chats/', {
-                "name": text
-            })
-        } else if (type === 'delete') {// Chat Delete 🧨🧨
-            axios.delete(APIUrl + 'chats/' + chat)
-        }
-    }
+    // function postData(type, text, chat) {// Master CRUD function
+    //     const time = new Date()
+    //     var idTime = time.getTime()
+    //     if (type === 'message') {// Message post
+    //         axios.post(APIUrl + 'messages/', {
+    //             "id": idTime,
+    //             "text": text,
+    //             "user": {
+    //                 "id": user
+    //             },
+    //             "chat": {
+    //                 "id": 1
+    //             },
+    //         })
+    //     } else if (type === 'chat') {// Chat update/put name
+    //         axios.put(APIUrl + 'chats/' + page + '/', {
+    //             "name": text
+    //         })
+    //     } else if (type === 'create-chat') {// Chat create/post
+    //         axios.post(APIUrl + 'chats/', {
+    //             "name": text
+    //         })
+    //     } else if (type === 'delete') {// Chat Delete 🧨🧨
+    //         axios.delete(APIUrl + 'chats/' + chat)
+    //     }
+    // }
 
     return (
         <>
-        <GlobalProvider>
-            {page === 'Home' &&
-                <Home
-                    data={chat}
-                    setPage={setPage}
-                    post={postData}
-                />}
-
-            {page !== 'Home' &&
-                <nav className='fixed-top'>
-                    <HeaderNav
+            <GlobalProvider>
+                {page === 'Home' &&
+                    <Home
+                        data={chat}
                         setPage={setPage}
-                        page={page}
-                        chatData={chat}
-                        post={postData} />
-                </nav>}
+                        // post={postData}
+                    />}
 
-            {page !== 'Home' &&
-                <div className='mt-5 pt-5'>
-                    <ChatWindow
-                        data={data}
-                        user={user}
-                        post={postData}
-                        page={page}
-                        addMessage={addMessage} />
-                </div>}
-        </GlobalProvider>
+                {page !== 'Home' &&
+                    <nav className='fixed-top'>
+                        <HeaderNav
+                            setPage={setPage}
+                            page={page}
+                            chatData={chat}
+                            // post={postData} 
+                            />
+                    </nav>}
+
+                {page !== 'Home' &&
+                    <div className='mt-5 pt-5'>
+                        <ChatWindow
+                            data={data}
+                            // user={user}
+                            // post={postData}
+                            page={page}
+                            addMessage={addMessage} />
+                    </div>}
+            </GlobalProvider>
         </>
     )
 }

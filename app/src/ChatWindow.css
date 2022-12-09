@@ -42,8 +42,9 @@
     margin-left: 1%;
 }
 
-.sent, .received{
-    border-radius: 20px;
+
+.sent, .received{ /* https://codepen.io/swards/pen/gxQmbj */
+    border-radius: 20px; /* chat bubble style */
     padding: 2vw;
     width: fit-content;
     word-break: break-word;

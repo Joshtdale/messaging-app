@@ -72,7 +72,8 @@ function ChatWindow(props) {
     // does messages in start = socket messages
 
     useEffect(() => {
-        const pusher = new Pusher(process.env.REACT_APP_PUSHER_ENV, {
+        // const pusher = new Pusher(process.env.REACT_APP_PUSHER_ENV, {
+        const pusher = new Pusher('1fb64f027f5f40e81a79', {
             cluster: process.env.REACT_APP_CLUSTER
         })
         const channel1 = pusher.subscribe(process.env.REACT_APP_PUSHER_CHANNEL);
