@@ -13,17 +13,33 @@ import { GlobalProvider } from './context/GlobalState';
 // import NavBar  from './componets'
 // import { Login, Profile, Register }  from './componets/user'
 import request from './services/api.request'
+import NavBar from './components/Navbar';
+import { Outlet } from 'react-router-dom';
+import { useGlobalState } from "./context/GlobalState";
+import Profile from './components/user/Profile';
 
 // const APIUrl = 'https://8000-joshtdale-messagingappb-fkhldm7b4nl.ws-us78.gitpod.io/api/'
-// const user = 1
 
 
 
 
+let user = ''
 
 
 
 export default function App() {
+    // const [loggedin, setLoggedin] = useState()
+    const [state, dispatch] = useGlobalState();
+    if (state.currentUser) {
+        user = state.currentUser.user_id
+        // console.log(state.currentUser.user_id)
+        // setLoggedin(user)
+    } else if (!state.currentUser) {
+        console.log('no user')
+    }
+// console.log(user)
+
+
     const [data, setData] = useState([]);
     const [chat, setChat] = useState([])
     const [friends, setFriends] = useState([])
@@ -61,10 +77,10 @@ export default function App() {
             let options = {
                 url: '/chats',
                 method: 'GET',
-                data: { // gets sent in the body of the request
-                    key: '',
-                    otherKey: '',
-                }
+                // data: { // gets sent in the body of the request
+                //     key: '',
+                //     otherKey: '',
+                // }
             }
             let resp = await request(options)
             setChat(resp.data)
@@ -121,41 +137,77 @@ export default function App() {
         // getData()
     }
 
-    // function postData(type, text, chat) {// Master CRUD function
-    //     const time = new Date()
-    //     var idTime = time.getTime()
-    //     if (type === 'message') {// Message post
-    //         axios.post(APIUrl + 'messages/', {
-    //             "id": idTime,
-    //             "text": text,
-    //             "user": {
-    //                 "id": user
-    //             },
-    //             "chat": {
-    //                 "id": 1
-    //             },
-    //         })
-    //     } else if (type === 'chat') {// Chat update/put name
-    //         axios.put(APIUrl + 'chats/' + page + '/', {
-    //             "name": text
-    //         })
-    //     } else if (type === 'create-chat') {// Chat create/post
-    //         axios.post(APIUrl + 'chats/', {
-    //             "name": text
-    //         })
-    //     } else if (type === 'delete') {// Chat Delete 🧨🧨
-    //         axios.delete(APIUrl + 'chats/' + chat)
-    //     }
-    // }
+    async function postData(type, text, chat) {// Master CRUD function
+        const time = new Date()
+        var idTime = time.getTime()
+        if (type === 'message') {// Message post
 
+            let options = {
+                method: 'POST',
+                url: 'messages/',
+                data: {
+                        "id": idTime,
+                        "text": text,
+                        "user": {
+                            "id": user
+                        },
+                        "chat": {
+                            "id": page
+                        },
+                }
+            }
+            console.log(options)
+            let resp = await request(options);
+        } else if (type === 'chat') {// Chat update/put name
+            // axios.put(APIUrl + 'chats/' + page + '/', {
+            //     "name": text
+            // })
+            let options = {
+                method: 'PUT',
+                url: 'chats/' + page + '/',
+                data: {
+                    "name": text
+                }
+            }
+            // console.log(options)
+            let resp = await request(options);
+
+        } else if (type === 'create-chat') {// Chat create/post
+            // axios.post(APIUrl + 'chats/', {
+            //     "name": text
+            // })
+            let options = {
+                method: 'POST',
+                url: 'chats/',
+                data: {
+                    "name": text
+                }
+            }
+            // console.log(options)
+            let resp = await request(options);
+
+        } else if (type === 'delete') {// Chat Delete 🧨🧨
+            // axios.delete(APIUrl + 'chats/' + chat)
+            let options = {
+                method: 'DELETE',
+                url: 'chats/' + chat,
+
+            }
+            // console.log(options)
+            let resp = await request(options);
+        }
+    }
+// console.log(page)
     return (
         <>
             <GlobalProvider>
+                <NavBar />
+
                 {page === 'Home' &&
                     <Home
                         data={chat}
                         setPage={setPage}
-                        // post={postData}
+                        post={postData}
                     />}
 
                 {page !== 'Home' &&
@@ -164,19 +216,20 @@ export default function App() {
                             setPage={setPage}
                             page={page}
                             chatData={chat}
-                            // post={postData} 
-                            />
+                            post={postData}
+                        />
                     </nav>}
 
                 {page !== 'Home' &&
                     <div className='mt-5 pt-5'>
                         <ChatWindow
                             data={data}
-                            // user={user}
-                            // post={postData}
+                            user={user}
+                            post={postData}
                             page={page}
                             addMessage={addMessage} />
                     </div>}
+                <Outlet />
             </GlobalProvider>
         </>
     )
