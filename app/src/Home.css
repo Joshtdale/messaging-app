@@ -1,0 +1,17 @@
+.groupChats {
+    height: 15vh;
+    border-bottom: 1px solid #8e8e93;
+}
+
+.chatDelete {
+    height: 7vh;
+}
+
+.searchBox {
+    background-color: rgba(0, 0, 0, 0.973);
+    border-radius: 20px;
+    width: 85vw;
+    padding: 2vw;
+    color: white;
+    border: 1px solid #8e8e93;
+}
