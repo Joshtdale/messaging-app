@@ -13,9 +13,11 @@ import { GlobalProvider } from './context/GlobalState';
 // import NavBar  from './componets'
 // import { Login, Profile, Register }  from './componets/user'
 import request from './services/api.request'
+import NavBar from './components/Navbar';
+import { Outlet } from 'react-router-dom';
+import { useGlobalState } from "./context/GlobalState";
 
 // const APIUrl = 'https://8000-joshtdale-messagingappb-fkhldm7b4nl.ws-us78.gitpod.io/api/'
-// const user = 1
 
 
 
@@ -24,11 +26,15 @@ import request from './services/api.request'
 
 
 export default function App() {
+    const [state, dispatch] = useGlobalState();
+    const user = state.currentUser.user_id
+    console.log(user)
+
     const [data, setData] = useState([]);
     const [chat, setChat] = useState([])
     const [friends, setFriends] = useState([])
     const [page, setPage] = useState('Home')
-
+    
     useEffect(() => { // GET Axios call 📞
         async function getData() {
             let options = {
@@ -121,63 +127,76 @@ export default function App() {
         // getData()
     }
 
-    // function postData(type, text, chat) {// Master CRUD function
-    //     const time = new Date()
-    //     var idTime = time.getTime()
-    //     if (type === 'message') {// Message post
-    //         axios.post(APIUrl + 'messages/', {
-    //             "id": idTime,
-    //             "text": text,
-    //             "user": {
-    //                 "id": user
-    //             },
-    //             "chat": {
-    //                 "id": 1
-    //             },
-    //         })
-    //     } else if (type === 'chat') {// Chat update/put name
-    //         axios.put(APIUrl + 'chats/' + page + '/', {
-    //             "name": text
-    //         })
-    //     } else if (type === 'create-chat') {// Chat create/post
-    //         axios.post(APIUrl + 'chats/', {
-    //             "name": text
-    //         })
-    //     } else if (type === 'delete') {// Chat Delete 🧨🧨
-    //         axios.delete(APIUrl + 'chats/' + chat)
-    //     }
-    // }
+    async function postData(type, text, chat) {// Master CRUD function
+        const time = new Date()
+        var idTime = time.getTime()
+        if (type === 'message') {// Message post
+            // axios.post(APIUrl + 'messages/', {
+            //     "id": idTime,
+            //     "text": text,
+            //     "user": {
+            //         "id": user
+            //     },
+            //     "chat": {
+            //         "id": 1
+            //     },
+            // })
+        } else if (type === 'chat') {// Chat update/put name
+            // axios.put(APIUrl + 'chats/' + page + '/', {
+            //     "name": text
+            // })
+        } else if (type === 'create-chat') {// Chat create/post
+            // axios.post(APIUrl + 'chats/', {
+            //     "name": text
+            // })
+            let options = {
+                method: 'POST',
+                url: 'chats/',
+                data: {
+                    "name": text
+                }
+            }
+            console.log(options)
+            let resp = await request(options);
 
-    return (
-        <>
+            } else if (type === 'delete') {// Chat Delete 🧨🧨
+                // axios.delete(APIUrl + 'chats/' + chat)
+            }
+        }
+
+        return (
+            <>
             <GlobalProvider>
-                {page === 'Home' &&
-                    <Home
-                        data={chat}
-                        setPage={setPage}
-                        // post={postData}
-                    />}
+                    <NavBar/>
 
-                {page !== 'Home' &&
-                    <nav className='fixed-top'>
-                        <HeaderNav
+                    {page === 'Home' &&
+                        <Home
+                            data={chat}
                             setPage={setPage}
-                            page={page}
-                            chatData={chat}
-                            // post={postData} 
-                            />
-                    </nav>}
+                        post={postData}
+                        />}
 
-                {page !== 'Home' &&
-                    <div className='mt-5 pt-5'>
-                        <ChatWindow
-                            data={data}
-                            // user={user}
-                            // post={postData}
-                            page={page}
-                            addMessage={addMessage} />
-                    </div>}
-            </GlobalProvider>
-        </>
-    )
-}
+                    {page !== 'Home' &&
+                        <nav className='fixed-top'>
+                            <HeaderNav
+                                setPage={setPage}
+                                page={page}
+                                chatData={chat}
+                            post={postData} 
+                            />
+                        </nav>}
+
+                    {page !== 'Home' &&
+                        <div className='mt-5 pt-5'>
+                            <ChatWindow
+                                data={data}
+                                // user={user}
+                                post={postData}
+                                page={page}
+                                addMessage={addMessage} />
+                        </div>}
+                        <Outlet/>
+                        </GlobalProvider>
+            </>
+        )
+    }
