@@ -12,7 +12,6 @@ function ChatWindow() {
     const [state, dispatch] = useGlobalState()
     const bottomRef = useRef(null);
     const [value, setValue] = useState('')
-    const [msgEvent, setMsgEvent] = useState(0)
 
     let filteredMessages = state.messages.filter((item) => item.chat.id == chatid)
     let mapKey = 0
@@ -75,7 +74,6 @@ function ChatWindow() {
             // console.log(data)
             // Code that runs when channel1 listens to a new message
             addMessage(data);
-            setMsgEvent(msgEvent + 1)
         })
 
         console.log(channel1)
