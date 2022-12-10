@@ -5,56 +5,15 @@ import Pusher from 'pusher-js';
 
 function ChatWindow(props) {
     const bottomRef = useRef(null);
+    const [value, setValue] = useState('')
+    const [msgEvent, setMsgEvent] = useState(0)
+    const message = document.getElementById('message')
 
-    let messages = props.data
+    let messages = props.messages
     let filteredMessages = messages.filter((item) => item.chat.id === props.page)
     // console.log(filteredMessages)
     let mapKey = 0
-    // let messages = [
-    //     {
-    //         text: 'Hello, This is more textHello, This is more textHello, This is more textHello, This is more textHello, This is more textHello, This is more textHello, This is more textHello, This is more textHello, This is more textHello, This is more textHello, This is more text',
-    //         user: 2
-    //     },
-    //     {
-    //         text: 'Test, Another test message',
-    //         user: 1
-    //     },
-    //     {
-    //         text: 'Test, Another test message',
-    //         user: 1
-    //     },
-    //     {
-    //         text: 'Test',
-    //         user: 2
-    //     },
-    //     {
-    //         text: 'TestHello, This is more textHello, This is more textHello, This is more textHello, This is more textHello, This is more text',
-    //         user: 2
-    //     },
-    //     {
-    //         text: 'Hello, This is more textHello, This is more textHello, This is more textHello, This is more textHello, This is more textHello, This is more textHello, This is more textHello, This is more text',
-    //         user: 1
-    //     },
-    //     {
-    //         text: 'Test, Another test message',
-    //         user: 1
-    //     },
-    //     {
-    //         text: 'Test',
-    //         user: 2
-    //     },
-    //     {
-    //         text: 'TestHello, This is more textHello, This is more textHello, This is more textHello, This is more textHello, This is more text',
-    //         user: 2
-    //     },
-    //     {
-    //         text: 'Hello, This is more textHello, This is more textHello, This is more textHello, This is more textHello, This is more textHello, This is more textHello, This is more textHello, This is more text',
-    //         user: 1
-    //     },
-    // ]
 
-    const [value, setValue] = useState('')
-    const message = document.getElementById('message')
 
     function handleKeyDown(event) {
         if (event.key === 'Enter') {
@@ -80,9 +39,10 @@ function ChatWindow(props) {
         // You can bind more channels here like this
         // const channel2 = pusher.subscribe('channel_name2')
         channel1.bind(`chat_group_${props.page}`, function (data) {
-            console.log(data)
+            // console.log(data)
             // Code that runs when channel1 listens to a new message
             props.addMessage(data);
+            setMsgEvent(msgEvent + 1)
         })
 
         console.log(channel1)
@@ -112,6 +72,9 @@ function ChatWindow(props) {
                         <div key={mapKey} className={sentRec + ' chatBody row w-100'}>
                             <div className={' messageContainer col-9 p-1'}>
                                 <div className={messageClass}>{item.text}</div>
+                                {/* <div className='fs-8'>{item.user.name}</div> */}
+
+                                {/* {console.log(item.user.name)} */}
                             </div>
                         </div>
                     )
