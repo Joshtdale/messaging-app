@@ -30,15 +30,16 @@ let user = ''
 export default function App() {
     // const [loggedin, setLoggedin] = useState()
     const [state, dispatch] = useGlobalState();
+
     let navigate = useNavigate()
-    
+    useEffect(() => {
+
     if (!state.currentUser) {
         navigate('/login')
     } else {
         navigate('/msgs')
     }
-    // console.log(user)
-
+    }, []);
 
     // const [chat, setChat] = useState([])
     const [friends, setFriends] = useState([])
@@ -65,7 +66,7 @@ export default function App() {
     // // }, []);
 
 
- 
+
     // console.log(page)
     return (
         <>

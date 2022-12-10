@@ -57,7 +57,7 @@ function Home() {
         getData()
         // setInterval(getData, 1000)
 
-        console.log("connecting to pusher " + '1fb64f027f5f40e81a79');
+        // console.log("connecting to pusher " + '1fb64f027f5f40e81a79');
         const pusher = new Pusher('1fb64f027f5f40e81a79', {
             cluster: 'us2'
         })

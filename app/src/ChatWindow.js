@@ -44,10 +44,13 @@ function ChatWindow() {
             setValue('')
         }
     };
-
+    function scrollBottom(){
+    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }
     useEffect(() => { //https://bobbyhadz.com/blog/react-scroll-to-bottom
-        bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
-    }, [state.messages]);
+        scrollBottom()
+    // }, [state.messages]);
+    }, []);
     //useMemo
     // does messages in start = socket messages
 
@@ -60,6 +63,7 @@ function ChatWindow() {
                 msg
             ]
         })
+        scrollBottom()
     }
 
     useEffect(() => {

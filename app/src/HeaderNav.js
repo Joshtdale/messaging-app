@@ -18,7 +18,7 @@ function HeaderNav(props) {
 
 
     let chatObj = state.chats.find((item) => item.id == props.chatid)
-    console.log(chatObj)
+    // console.log(chatObj)
 
     async function handleKeyDown(event){
         if (event.key === 'Enter') {
