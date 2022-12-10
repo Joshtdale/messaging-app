@@ -40,7 +40,7 @@ export default function App() {
 // console.log(user)
 
 
-    const [data, setData] = useState([]);
+    const [messages, setMessages] = useState([]);
     const [chat, setChat] = useState([])
     const [friends, setFriends] = useState([])
     const [page, setPage] = useState('Home')
@@ -50,13 +50,10 @@ export default function App() {
             let options = {
                 url: '/messages',
                 method: 'GET',
-                data: { // gets sent in the body of the request
-                    key: '',
-                    otherKey: '',
-                }
+
             }
             let resp = await request(options)
-            setData(resp.data)
+            setMessages(resp.data)
             console.log(resp.data)
             // const response = await axios.get(APIUrl + 'messages/')
             // //Filter by user in url to return chats and messages - in the future
@@ -77,10 +74,7 @@ export default function App() {
             let options = {
                 url: '/chats',
                 method: 'GET',
-                // data: { // gets sent in the body of the request
-                //     key: '',
-                //     otherKey: '',
-                // }
+
             }
             let resp = await request(options)
             setChat(resp.data)
@@ -101,7 +95,7 @@ export default function App() {
         // You can bind more channels here like this
         // const channel2 = pusher.subscribe('channel_name2')
         // channel1.bind(`chat_group_${props.page}`,function(data) {
-        channel1.bind(`chat_group_1`, function (data) {
+        channel1.bind(`chat_group_${page}`, function (data) {
             console.log(data)
             // Code that runs when channel1 listens to a new message
             //props.addMessage(data);
@@ -132,9 +126,15 @@ export default function App() {
 
     //     })
     // // }, []);
-    function addMessage(data) {
+    function addMessage(msg) {
         // todo: create an object out of data, append the obj to the messages in state
-        // getData()
+        // console.log(msg)
+        let oldMessages = messages; // use spreader
+        // let msgJson = JSON.parse(msg)
+        // console.log(msgJson)
+        oldMessages.push(msg)
+        console.log(oldMessages)
+        setMessages(oldMessages)
     }
 
     async function postData(type, text, chat) {// Master CRUD function
@@ -156,7 +156,7 @@ export default function App() {
                         },
                 }
             }
-            console.log(options)
+            // console.log(options)
             let resp = await request(options);
         } else if (type === 'chat') {// Chat update/put name
             // axios.put(APIUrl + 'chats/' + page + '/', {
@@ -223,7 +223,7 @@ export default function App() {
                 {page !== 'Home' &&
                     <div className='mt-5 pt-5'>
                         <ChatWindow
-                            data={data}
+                            messages={messages}
                             user={user}
                             post={postData}
                             page={page}
