@@ -10,6 +10,7 @@
     /* align-content: flex-end; */
     max-height: 95vh;
     overflow: scroll;
+    margin-top: 10vh !important;
 }
 
 .chatBody {
@@ -48,5 +49,24 @@
     padding: 2vw;
     width: fit-content;
     word-break: break-word;
+    min-width: 50px;
+}
 
+.sentName{
+    display: flex;
+    justify-content: end;
+    margin-right: 2.5vw;
+}
+
+.receivedName{
+    margin-left: 2.5vw;
+}
+
+.receivedName, .sentName {
+    font-size: 3vw;
+    opacity: 0.5;
+}
+
+.divRef {
+    height: 2vh;
 }
