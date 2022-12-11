@@ -43,6 +43,7 @@ function Home() {
             url: '/chats',
             method: 'GET',
         })
+        console.log(chatResp)
 
         dispatch({
             ...state,
@@ -94,29 +95,21 @@ function Home() {
 
     async function postData(type, text, chat) {// Master CRUD function
         if (type === 'create-chat') {// Chat create/post
-            // axios.post(APIUrl + 'chats/', {
-            //     "name": text
-            // })
             let options = {
-                method: 'POST',
+                method: 'post',
                 url: 'chats/',
                 data: {
-                    "name": text
+                    "name": text,
+
                 }
             }
-            // console.log(options)
+            console.log(options)
             let resp = await request(options);
             dispatch({
                 ...state,
                 chats: [...state.chats, resp.data]
             })
-            // dispatch({
-            //     ...state,
-            //     chats: [
-            //         ...chat,
-            //         resp.data
-            //     ]
-            // })
+
 
         } else if (type === 'delete') {// Chat Delete 🧨🧨
             // axios.delete(APIUrl + 'chats/' + chat)
@@ -127,11 +120,11 @@ function Home() {
             }
             // console.log(options)
             let resp = await request(options);
-            // dispatch({
-            //     ...state,
-            //     chats: [ state.chats.filter(c => c.id !== chat) ]
-            // })
-            getData()
+            dispatch({
+                ...state,
+                chats: [ state.chats.filter(c => c.id !== chat) ]
+            })
+            // getData()
         }
     }
 
@@ -140,7 +133,7 @@ function Home() {
             <div className='container-fluid'>
                 <div className="row justify-content-center">
                     <div className="col">
-                        <HomeNav setPage={setPage} getData={getData} page={page} post={postData} navigate={navigate} />
+                        <HomeNav setPage={setPage} getData={getData} page={page} postData={postData} navigate={navigate} />
                     </div>
                     <div className="row">
                         <div className="col d-flex justify-content-center">

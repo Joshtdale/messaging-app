@@ -42,35 +42,14 @@ export default function App() {
     }, []);
 
     // const [chat, setChat] = useState([])
-    const [friends, setFriends] = useState([])
-
-
-
-
-
-    // // useEffect(() => {
-    //     const channel = pusher.subscribe('chat-channel');
-    //     channel.bind('new-message', function (data) {
-    //         console.log('message sent')
-    //         console.log(data)
-    //         // assuming the chat_id is stored in state
-    //         // if (data.chat == chat_id) {
-    //             // if (data.user.id == user) {
-    //                 // post message from current user (me) (right justified)
-    //             // } else {
-    //                 // post message from other user in the chat room (them) (left justified)
-    //             // }
-    //         // }
-
-    //     })
-    // // }, []);
+    // const [friends, setFriends] = useState([])
 
 
 
     // console.log(page)
     return (
         <>
-            <NavBar />
+            {/* <NavBar /> */}
             <Outlet />
         </>
     )

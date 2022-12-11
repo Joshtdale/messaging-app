@@ -37,6 +37,10 @@ function ChatWindow() {
             // console.log(options)
             // @todo: set up pusher to get messages sent. 
             let resp = await request(options);
+            // dispatch({
+            //     ...state,
+            //     messages: [...state.messages, resp.data]
+            // })
             dispatch({
                 ...state,
                 messages: [...state.messages, resp.data]
@@ -56,15 +60,13 @@ function ChatWindow() {
     // does messages in start = socket messages
 
     function addMessage(msg) {
-        // todo: create an object out of data, append the obj to the messages in state
+
         dispatch({
             ...state,
-            messages: [
-                ...state.messages,
-                msg
-            ]
+            messages: [...state.messages, msg]
         })
-        scrollBottom()
+        // scrollBottom()
+        setTimeout(scrollBottom, 300)
         console.log('new message')
         
     }
@@ -78,12 +80,11 @@ function ChatWindow() {
         // You can bind more channels here like this
         // const channel2 = pusher.subscribe('channel_name2')
         channel1.bind(`chat_group_${chatid}`, function (data) {
-            // console.log(data)
             // Code that runs when channel1 listens to a new message
             addMessage(data);
         })
 
-        console.log(channel1)
+        // console.log(channel1)
 
         return (() => {
             pusher.unsubscribe(process.env.REACT_APP_PUSHER_CHANNEL)
@@ -104,18 +105,20 @@ function ChatWindow() {
                     {filteredMessages.map((item) => {
                         mapKey += 1
                         // console.log(item.user.id)
-                        let messageClass = 'sent'
+                        let messageClass = 'sent text-center'
+                        let nameClass = 'sentName'
                         let sentRec = 'd-flex flex-row-reverse'
                         if (item.user.id !== state.currentUser.user_id) {
-                            messageClass = 'received'
+                            messageClass = 'received text-center'
+                            nameClass = 'receivedName'
                             sentRec = ''
                         }
                         return (
                             <div key={mapKey} className={sentRec + ' chatBody row w-100'}>
-                                <div className={' messageContainer col-9 p-1'}>
+                                <div className={' messageContainer col-9 p-1 mt-2'}>
+                                    <div className={nameClass}>{item.user.name}</div>
                                     <div className={messageClass}>{item.text}</div>
-                                    {/* <div className='fs-8'>{item.user.name}</div> */}
-                                    {/* {console.log(item.user.name)} */}
+                                    {/* {console.log(item.user)} */}
                                 </div>
                             </div>
                         )
