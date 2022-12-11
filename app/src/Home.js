@@ -23,40 +23,39 @@ function Home() {
     const [value, setValue] = useState('')
     const input = document.getElementById('input')
 
+
     async function getData() {
-        // const response = await axios.get(APIUrl + 'messages/')
-        // //Filter by user in url to return chats and messages - in the future
-        // const chatList = await axios.get(APIUrl + 'chats/')
-        // //Filter chats by user - in the future
-        // const friendList = await axios.get(APIUrl + 'friends/')
-        // setData(response.data)
-        // setChat(chatList.data)
-        // setFriends(friendList.data)
-        // // console.log(response.data)
-        // console.log(friendList.data)
-        let msgResp = await request({
-            url: '/messages',
-            method: 'GET',
-        })
-
-        let chatResp = await request({
-            url: '/chats',
-            method: 'GET',
-        })
-        console.log(chatResp)
-
-        dispatch({
-            ...state,
-            chats: chatResp.data,
-            messages: msgResp.data,
-        })
+        try {
+            let msgResp = await request({
+                url: '/messages',
+                method: 'GET',
+            })
+    
+            let chatResp = await request({
+                url: '/chats',
+                method: 'GET',
+            })
+            console.log(chatResp)
+    
+            dispatch({
+                ...state,
+                chats: chatResp.data,
+                messages: msgResp.data,
+            })
+        } catch {
+            localStorage.clear()
+            console.log('You logged out!')
+            navigate('/login')
+        }
     }
 
     useEffect(() => { // GET Axios call 📞
         if (!state.currentUser) {
             navigate('/login')
         }
-        getData()
+
+            getData()
+
         // setInterval(getData, 1000)
 
         // console.log("connecting to pusher " + '1fb64f027f5f40e81a79');

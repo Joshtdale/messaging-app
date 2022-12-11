@@ -116,7 +116,7 @@ function ChatWindow() {
                         return (
                             <div key={mapKey} className={sentRec + ' chatBody row w-100'}>
                                 <div className={' messageContainer col-9 p-1 mt-2'}>
-                                    <div className={nameClass}>{item.user.name}</div>
+                                    <div className={nameClass}>{item.user.name}🐀</div>
                                     <div className={messageClass}>{item.text}</div>
                                     {/* {console.log(item.user)} */}
                                 </div>
