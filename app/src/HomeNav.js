@@ -1,11 +1,14 @@
 import React from 'react'
 import './HomeNav.css'
 import createButton from './images/create.png'
-import addFriends from './images/addFriends.png'
+import profile from './images/profile.png'
 import BackButton from './images/thenounproject.png'
+import { useNavigate } from 'react-router-dom'
+
 
 
 function HomeNav(props) {
+    let navigate = useNavigate()
     return (
         <div className='row homeNavRow vw-100'>
 
@@ -19,8 +22,8 @@ function HomeNav(props) {
                 </div>
 
                 <div className="col text-center createBtn">
-                    {props.page !== 'options' && <img onClick={() => props.post('create-chat', 'New chat')} className='createBtn btn' src={createButton} alt='Create'></img>}
-                    {props.page !== 'options' && <img onClick={() => props.post('create-chat', 'New chat')} className='createBtn btn' src={addFriends} alt='Add friends'></img>}
+                    {props.page !== 'options' && <img onClick={() => props.postData('create-chat', 'New chat')} className='createBtn btn' src={createButton} alt='Create'></img>}
+                    {props.page !== 'options' && <img onClick={() => navigate('/profile')} className='createBtn btn' src={profile} alt='Profile'></img>}
                 </div>
 
             </div>
