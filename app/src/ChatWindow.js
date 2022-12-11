@@ -46,6 +46,7 @@ function ChatWindow() {
     };
     function scrollBottom(){
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+    // console.log('scroll working')
     }
     useEffect(() => { //https://bobbyhadz.com/blog/react-scroll-to-bottom
         scrollBottom()
@@ -64,6 +65,8 @@ function ChatWindow() {
             ]
         })
         scrollBottom()
+        console.log('new message')
+        
     }
 
     useEffect(() => {
@@ -117,7 +120,7 @@ function ChatWindow() {
                             </div>
                         )
                     })}
-                    <div ref={bottomRef} />
+                    <div className='divRef' ref={bottomRef} />
                 </div>
                 <div className='row fixed-bottom'>
                     <div className="col d-flex justify-content-center m-2 pl-0">

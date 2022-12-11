@@ -23,36 +23,37 @@ function Home() {
     const [value, setValue] = useState('')
     const input = document.getElementById('input')
 
+    async function getData() {
+        // const response = await axios.get(APIUrl + 'messages/')
+        // //Filter by user in url to return chats and messages - in the future
+        // const chatList = await axios.get(APIUrl + 'chats/')
+        // //Filter chats by user - in the future
+        // const friendList = await axios.get(APIUrl + 'friends/')
+        // setData(response.data)
+        // setChat(chatList.data)
+        // setFriends(friendList.data)
+        // // console.log(response.data)
+        // console.log(friendList.data)
+        let msgResp = await request({
+            url: '/messages',
+            method: 'GET',
+        })
+
+        let chatResp = await request({
+            url: '/chats',
+            method: 'GET',
+        })
+
+        dispatch({
+            ...state,
+            chats: chatResp.data,
+            messages: msgResp.data,
+        })
+    }
+
     useEffect(() => { // GET Axios call 📞
         if (!state.currentUser) {
             navigate('/login')
-        }
-        async function getData() {
-            // const response = await axios.get(APIUrl + 'messages/')
-            // //Filter by user in url to return chats and messages - in the future
-            // const chatList = await axios.get(APIUrl + 'chats/')
-            // //Filter chats by user - in the future
-            // const friendList = await axios.get(APIUrl + 'friends/')
-            // setData(response.data)
-            // setChat(chatList.data)
-            // setFriends(friendList.data)
-            // // console.log(response.data)
-            // console.log(friendList.data)
-            let msgResp = await request({
-                url: '/messages',
-                method: 'GET',
-            })
-
-            let chatResp = await request({
-                url: '/chats',
-                method: 'GET',
-            })
-
-            dispatch({
-                ...state,
-                chats: chatResp.data,
-                messages: msgResp.data,
-            })
         }
         getData()
         // setInterval(getData, 1000)
@@ -124,9 +125,10 @@ function Home() {
             let resp = await request(options);
             dispatch({
                 ...state,
-                chats: [ state.chats.filter(c => c.id != chat) ]
+                chats: [ state.chats.filter(c => c.id !== chat) ]
             })
         }
+        getData()
     }
 
     return (
@@ -134,7 +136,7 @@ function Home() {
             <div className='container-fluid'>
                 <div className="row justify-content-center">
                     <div className="col">
-                        <HomeNav setPage={setPage} page={page} post={postData} />
+                        <HomeNav setPage={setPage} getData={getData} page={page} post={postData} navigate={navigate} />
                     </div>
                     <div className="row">
                         <div className="col d-flex justify-content-center">

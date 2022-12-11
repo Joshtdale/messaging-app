@@ -30,9 +30,9 @@ root.render(
               <Route path="login" element={<Login />} />
               <Route path="register" element={<Register />} />
               <Route path="profile" element={<Profile />} />
-            </Route>
             <Route path="/msgs" element={<Home />} />
             <Route path="/msgs/:chatid" element={<ChatWindow />} />
+            </Route>
           </Routes>
         </Router>
       </GlobalProvider>
