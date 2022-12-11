@@ -108,11 +108,15 @@ function Home() {
             let resp = await request(options);
             dispatch({
                 ...state,
-                chats: [
-                    ...chat,
-                    resp.data
-                ]
+                chats: [...state.chats, resp.data]
             })
+            // dispatch({
+            //     ...state,
+            //     chats: [
+            //         ...chat,
+            //         resp.data
+            //     ]
+            // })
 
         } else if (type === 'delete') {// Chat Delete 🧨🧨
             // axios.delete(APIUrl + 'chats/' + chat)
@@ -123,12 +127,12 @@ function Home() {
             }
             // console.log(options)
             let resp = await request(options);
-            dispatch({
-                ...state,
-                chats: [ state.chats.filter(c => c.id !== chat) ]
-            })
+            // dispatch({
+            //     ...state,
+            //     chats: [ state.chats.filter(c => c.id !== chat) ]
+            // })
+            getData()
         }
-        getData()
     }
 
     return (
