@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useGlobalState } from "../../context/GlobalState";
 import jwtDecode from "jwt-decode";
 import './User.css'
-import logo from '/workspace/messaging-app/app/src/images/CHATR/NoBackground/'
+import logo from '/workspace/messaging-app/app/src/images/CHATR/NoBackground/Logobubblebackground.png'
 
 const Login = () => {
     let navigate = useNavigate();
@@ -31,43 +31,53 @@ const Login = () => {
 
     return (
         <div className="container vh-100 d-flex justify-content-center align-items-center">
-            <div className="row text-center">
+            <div className="row">
                 <div className="col">
-                    <div className="c-form">
-                        <form onSubmit={handleLogin}>
-                            <div>
-                                {/* <label htmlFor="username">Username: </label> */}
-                                <input
-                                    type="text"
-                                    id="username"
-                                    name="username"
-                                    placeholder="Username"
-                                    className="userInput"
-                                    onChange={(e) => setUsername(e.target.value)}
-                                    required
-                                />
+                    <div className="row">
+                        <div className="col-12">
+                            <img className="loginLogo" src={logo} alt="logo" />
+                        </div>
+                    </div>
+                    <div className="row text-center">
+                        <div className="col">
+                            <div className="c-form">
+                                <form onSubmit={handleLogin}>
+                                    <div>
+                                        {/* <label htmlFor="username">Username: </label> */}
+                                        <input
+                                            type="text"
+                                            id="username"
+                                            name="username"
+                                            placeholder="Username"
+                                            className="userInput"
+                                            onChange={(e) => setUsername(e.target.value)}
+                                            required
+                                        />
+                                    </div>
+                                    <div>
+                                        {/* <label htmlFor="pass">Password: </label> */}
+                                        <input
+                                            type="password"
+                                            id="pass"
+                                            name="password"
+                                            minLength="8"
+                                            placeholder="Password"
+                                            className="userInput"
+                                            required
+                                            onChange={(e) => setPassword(e.target.value)}
+                                        />
+                                    </div>
+                                    <button
+                                        className="btn signInBtn"
+                                    >Sign in</button>
+                                    <button onClick={() => navigate('/register')} className='btn signInBtn'>Register</button>
+                                </form>
                             </div>
-                            <div>
-                                {/* <label htmlFor="pass">Password: </label> */}
-                                <input
-                                    type="password"
-                                    id="pass"
-                                    name="password"
-                                    minLength="8"
-                                    placeholder="Password"
-                                    className="userInput"
-                                    required
-                                    onChange={(e) => setPassword(e.target.value)}
-                                />
-                            </div>
-                            <button
-                                className="btn signInBtn"
-                            >Sign in</button>
-                            <button onClick={() => navigate('/register')} className='btn signInBtn'>Register</button>
-                        </form>
+                        </div>
                     </div>
                 </div>
             </div>
+
         </div>
     )
 

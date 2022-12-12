@@ -26,3 +26,8 @@
     max-width: 100%;
     height: 20vh;
 }
+
+.loginLogo {
+    height: 25vh; 
+    /* https://loading.io/animation/icon/ for icon animation */
+}
