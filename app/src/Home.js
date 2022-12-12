@@ -23,40 +23,39 @@ function Home() {
     const [value, setValue] = useState('')
     const input = document.getElementById('input')
 
+
     async function getData() {
-        // const response = await axios.get(APIUrl + 'messages/')
-        // //Filter by user in url to return chats and messages - in the future
-        // const chatList = await axios.get(APIUrl + 'chats/')
-        // //Filter chats by user - in the future
-        // const friendList = await axios.get(APIUrl + 'friends/')
-        // setData(response.data)
-        // setChat(chatList.data)
-        // setFriends(friendList.data)
-        // // console.log(response.data)
-        // console.log(friendList.data)
-        let msgResp = await request({
-            url: '/messages',
-            method: 'GET',
-        })
-
-        let chatResp = await request({
-            url: '/chats',
-            method: 'GET',
-        })
-        console.log(chatResp)
-
-        dispatch({
-            ...state,
-            chats: chatResp.data,
-            messages: msgResp.data,
-        })
+        try {
+            let msgResp = await request({
+                url: '/messages',
+                method: 'GET',
+            })
+    
+            let chatResp = await request({
+                url: '/chats',
+                method: 'GET',
+            })
+            // console.log(chatResp)
+    
+            dispatch({
+                ...state,
+                chats: chatResp.data,
+                messages: msgResp.data,
+            })
+        } catch {
+            localStorage.clear()
+            console.log('You logged out!')
+            navigate('/login')
+        }
     }
 
     useEffect(() => { // GET Axios call 📞
         if (!state.currentUser) {
             navigate('/login')
         }
-        getData()
+
+            getData()
+
         // setInterval(getData, 1000)
 
         // console.log("connecting to pusher " + '1fb64f027f5f40e81a79');
@@ -69,12 +68,12 @@ function Home() {
         // const channel2 = pusher.subscribe('channel_name2')
         // channel1.bind(`chat_group_${props.page}`,function(data) {
         channel1.bind(`chat_group_${page}`, function (data) {
-            console.log(data)
+            // console.log(data)
             // Code that runs when channel1 listens to a new message
             //props.addMessage(data);
         })
 
-        console.log(channel1);
+        // console.log(channel1);
 
         return (() => {
             pusher.unsubscribe('imclone_channel')
@@ -92,7 +91,6 @@ function Home() {
             // console.log(messages)
         }
     };
-
     async function postData(type, text, chat) {// Master CRUD function
         if (type === 'create-chat') {// Chat create/post
             let options = {
@@ -100,6 +98,11 @@ function Home() {
                 url: 'chats/',
                 data: {
                     "name": text,
+                    "user": [
+                        {
+                            "id": state.currentUser.user_id
+                        }
+                    ]
 
                 }
             }
@@ -122,7 +125,7 @@ function Home() {
             let resp = await request(options);
             dispatch({
                 ...state,
-                chats: [ state.chats.filter(c => c.id !== chat) ]
+                chats: [ state.chats.filter(c => c.id != chat) ]
             })
             // getData()
         }
@@ -132,7 +135,7 @@ function Home() {
         <>
             <div className='container-fluid'>
                 <div className="row justify-content-center">
-                    <div className="col">
+                    <div className="col sticky-top">
                         <HomeNav setPage={setPage} getData={getData} page={page} postData={postData} navigate={navigate} />
                     </div>
                     <div className="row">

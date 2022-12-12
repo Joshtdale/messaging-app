@@ -2,6 +2,8 @@ import { React, useEffect } from "react"
 import { useGlobalState } from "../../context/GlobalState";
 import request from '/workspace/messaging-app/app/src/services/api.request'
 import { useNavigate } from 'react-router-dom'
+import ProfileNav from "./ProfileNav";
+import profileImg from '/workspace/messaging-app/app/src/images/avatar.png'
 
 
 const Profile = () => {
@@ -9,10 +11,11 @@ const Profile = () => {
     let navigate = useNavigate()
 
     let user = ''
+    let count = 0
 
-    async function getUser(){
+    async function getUser() {
         let userResp = await request({
-            url: '/users/13/',
+            url: `/users/${state.currentUser.user_id}/`,
             method: 'GET',
         })
         dispatch({
@@ -21,30 +24,83 @@ const Profile = () => {
         })
     }
 
-    useEffect(() => { 
-        getUser() 
+    useEffect(() => {
+        getUser()
         // console.log('triggered get user')
     }, [])
     // console.log(state.userInfo)
 
-    if (state.userInfo){
+    if (state.userInfo) {
         user = state.userInfo.data
     }
 
-    function Logout(){
-        localStorage.clear()
-        console.log('You logged out!')
-        navigate('/login')
+    function countSetter(){
+        count = 0
     }
-console.log(state.currentUserToken)
+
+    function handleDblClick(){
+        count += 1
+        if (count === 2){
+            console.log('dbl click')
+            count = 0
+        }
+        setTimeout(countSetter, 200)
+        // console.log(event.detail);
+        // switch (event.detail) {
+        //     case 1: {
+        //         console.log('single click');
+        //         break;
+        //     }
+        //     case 2: {
+        //         console.log('double click');
+        //         break;
+        //     }
+        //     case 3: {
+        //         console.log('triple click');
+        //         break;
+        //     }
+        //     default: {
+        //         break;
+        //     }
+        // }
+    };
+
+
     return (
-        <div>
-            <h1>{state.currentUser.user_id}</h1>
-            <h1>{user.username}</h1>
-            <h1>{user.first_name}</h1>
-            <h1>{user.last_name}</h1>
-            <button onClick={Logout} className="btn btn-secondary">Logout</button>
-        </div>
+        <>
+            <div className="row">
+                <div className="col d-flex align-items-center justify-content-center">
+                    <ProfileNav />
+                </div>
+            </div>
+
+            <div className="container vh-100 d-flex justify-content-center">
+                <div className="row text-center">
+                    <div className="col">
+                        <div className="row">
+                            <div className="col">
+                                <img className="rounded-circle profileImg" src={profileImg} alt="Profile Image" />
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="col">
+                                <h3>{user.username}</h3>
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="col d-flex justify-content-end mr-0 p-1">
+                                <div title="Double click to edit" onClick={() => handleDblClick()}>{user.first_name}</div>
+                            </div>
+                            <div className="col d-flex justify-content-start ml-0 p-1">
+                                <div title="Double click to edit" onClick={() => handleDblClick()}>{user.last_name}</div>
+                            </div>
+                        </div>
+                        {/* <div>{user.last_name}</div> */}
+                        {/* <button onClick={Logout} className="btn btn-secondary">Logout</button> */}
+                    </div>
+                </div>
+            </div>
+        </>
     )
 }
 

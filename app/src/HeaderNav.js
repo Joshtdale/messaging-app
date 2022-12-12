@@ -16,6 +16,8 @@ function HeaderNav(props) {
     let navigate = useNavigate()
     const [state, dispatch] = useGlobalState()
 
+    let count = 0
+
 
     let chatObj = state.chats.find((item) => item.id == props.chatid)
     // console.log(chatObj)
@@ -34,9 +36,25 @@ function HeaderNav(props) {
             // console.log(value)
             renameInput.value = ''
             setName('stuff')
+            props.getData()
             // console.log(messages)
         }
     };
+
+    function countSetter(){
+        count = 0
+    }
+
+    function handleDblClick(){
+        count += 1
+        if (count === 2){
+            setName('rename')
+            count = 0
+        }
+        setTimeout(countSetter, 200)
+    };
+
+    console.log(chatObj)
 
     return (
         <div className='row headerNav'>
@@ -44,7 +62,7 @@ function HeaderNav(props) {
                 <img onClick={() => navigate('/msgs')} className='backButton mx-4' src={BackButton} alt="back" />
             </div>
             <div className="col-6 text-center">
-                {name !== 'rename' && <div onDoubleClick={() => setName('rename')}>{chatObj?.name}</div>}
+                {name !== 'rename' && <div onClick={handleDblClick}>{chatObj?.name}</div>}
                 {name === 'rename' && <input id='renameInput' placeholder={chatObj?.name} onKeyDown={(event) => handleKeyDown(event)} onChange={(e) => setValue(e.target.value)} />}
             </div>
             <div className="col-3 text-center">
