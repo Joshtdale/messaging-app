@@ -104,6 +104,7 @@ const Register = () => {
                             <input
                                 type="submit"
                                 value="Register"
+                                className="signInBtn"
                                 disabled={(
                                     user.password &&
                                     user.password.length >= 8 &&

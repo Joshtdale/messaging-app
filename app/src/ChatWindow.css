@@ -11,6 +11,7 @@
     max-height: 95vh;
     overflow: scroll;
     margin-top: 10vh !important;
+    /* padding-bottom: 50px !important; */
 }
 
 .chatBody {
@@ -37,6 +38,8 @@
     /* flex-direction: row-reverse; */
     margin-left: auto;
     border-bottom-right-radius: 10px 0px !important; 
+    border-top-left-radius: 10px 0px !important; 
+
     
 
 }
@@ -44,9 +47,8 @@
 .received {
     background-color: #69696d;
     margin-left: 1%;
-    /* /* border-bottom-left-radius: 10px 14px !important; */
     border-bottom-left-radius: 10px 0px !important; 
-    /* border-bottom-left-radius: 15px !important; */
+    border-top-right-radius: 10px 0px !important; 
 }
 
 

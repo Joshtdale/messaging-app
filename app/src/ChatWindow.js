@@ -60,7 +60,7 @@ function ChatWindow() {
     // does messages in start = socket messages
 
     function addMessage(msg) {
-
+        console.log(msg)
         dispatch({
             ...state,
             messages: [...state.messages, msg]

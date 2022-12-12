@@ -34,6 +34,7 @@ function HeaderNav(props) {
             // console.log(value)
             renameInput.value = ''
             setName('stuff')
+            props.getData()
             // console.log(messages)
         }
     };

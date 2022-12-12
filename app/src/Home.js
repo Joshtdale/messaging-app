@@ -121,7 +121,7 @@ function Home() {
             let resp = await request(options);
             dispatch({
                 ...state,
-                chats: [ state.chats.filter(c => c.id !== chat) ]
+                chats: [ state.chats.filter(c => c.id != chat) ]
             })
             // getData()
         }
