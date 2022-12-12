@@ -31,3 +31,8 @@
     height: 25vh; 
     /* https://loading.io/animation/icon/ for icon animation */
 }
+
+.nameInput {
+    background-color: transparent;
+    width: 50px;
+}

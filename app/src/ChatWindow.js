@@ -12,9 +12,15 @@ function ChatWindow() {
     const [state, dispatch] = useGlobalState()
     const bottomRef = useRef(null);
     const [value, setValue] = useState('')
+    const [sendWatcher, setSendWatcher] = useState(false)
+    // const [messageState, setMessage] = useState
 
     let filteredMessages = state.messages.filter((item) => item.chat.id == chatid)
     let mapKey = 0
+
+    // useEffect(() => {
+    //     console.log('reload UseEffect')
+    // },[state])
 
     async function handleKeyDown(event) {
         if (event.key === 'Enter') {
@@ -41,10 +47,13 @@ function ChatWindow() {
             //     ...state,
             //     messages: [...state.messages, resp.data]
             // })
+            console.log('resp.data', resp.data)
+
             dispatch({
                 ...state,
                 messages: [...state.messages, resp.data]
             })
+            setSendWatcher(!sendWatcher)
             setValue('')
         }
     };
@@ -52,30 +61,12 @@ function ChatWindow() {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
     // console.log('scroll working')
     }
+    const pusher = new Pusher(process.env.REACT_APP_PUSHER_KEY, {
+        // const pusher = new Pusher('1fb64f027f5f40e81a79', {
+        cluster: process.env.REACT_APP_CLUSTER
+    })
     useEffect(() => { //https://bobbyhadz.com/blog/react-scroll-to-bottom
-        scrollBottom()
-    // }, [state.messages]);
-    }, []);
-    //useMemo
-    // does messages in start = socket messages
-
-    function addMessage(msg) {
-        console.log(msg)
-        dispatch({
-            ...state,
-            messages: [...state.messages, msg]
-        })
-        // scrollBottom()
-        setTimeout(scrollBottom, 300)
-        console.log('new message')
-        
-    }
-
-    useEffect(() => {
-        // const pusher = new Pusher(process.env.REACT_APP_PUSHER_ENV, {
-        const pusher = new Pusher('1fb64f027f5f40e81a79', {
-            cluster: process.env.REACT_APP_CLUSTER
-        })
+            // console.log(process.env.REACT_APP_PUSHER_KEY)
         const channel1 = pusher.subscribe(process.env.REACT_APP_PUSHER_CHANNEL);
         // You can bind more channels here like this
         // const channel2 = pusher.subscribe('channel_name2')
@@ -83,6 +74,7 @@ function ChatWindow() {
             // Code that runs when channel1 listens to a new message
             addMessage(data);
         })
+        setTimeout(scrollBottom, 300)
 
         // console.log(channel1)
 
@@ -90,8 +82,41 @@ function ChatWindow() {
             pusher.unsubscribe(process.env.REACT_APP_PUSHER_CHANNEL)
             // pusher.unsubscribe('channel_name2')
         })
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    // }, [state.messages]);
+    }, [pusher]);
+
+    // useEffect(() => {
+    //     async function getMessages() {
+    //         let msgResp = await request({
+    //             url: '/messages',
+    //             method: 'GET',
+    //         })
+    //         dispatch({
+    //             ...state,
+    //             messages: msgResp.data,
+    //         })
+    //     }
+
+    //     getMessages()
+    //     setTimeout(scrollBottom, 300)
+    // }, [pusher])
+    //useMemo
+    // does messages in start = socket messages
+
+    function addMessage(msg) {
+        // console.log(msg.user.id)
+        // console.log('logged in user', state.currentUser.user_id)
+        if (msg.user.id !== state.currentUser.user_id) {
+            console.log('msg', msg)
+            console.log(state.messages)
+            dispatch({
+                ...state,
+                messages: [...state.messages, msg]
+            })
+        }
+        
+    }
+
 
     return (
         <>
@@ -105,11 +130,11 @@ function ChatWindow() {
                     {filteredMessages.map((item) => {
                         mapKey += 1
                         // console.log(item.user.id)
-                        let messageClass = 'sent text-center'
+                        let messageClass = 'sent'
                         let nameClass = 'sentName'
                         let sentRec = 'd-flex flex-row-reverse'
                         if (item.user.id !== state.currentUser.user_id) {
-                            messageClass = 'received text-center'
+                            messageClass = 'received'
                             nameClass = 'receivedName'
                             sentRec = ''
                         }

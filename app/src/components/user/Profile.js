@@ -1,4 +1,4 @@
-import { React, useEffect } from "react"
+import { React, useEffect, useState } from "react"
 import { useGlobalState } from "../../context/GlobalState";
 import request from '/workspace/messaging-app/app/src/services/api.request'
 import { useNavigate } from 'react-router-dom'
@@ -8,6 +8,8 @@ import profileImg from '/workspace/messaging-app/app/src/images/avatar.png'
 
 const Profile = () => {
     const [state, dispatch] = useGlobalState();
+    const [page, setPage] = useState('')
+    const [inputText, setInputText] = useState('')
     let navigate = useNavigate()
 
     let user = ''
@@ -34,14 +36,35 @@ const Profile = () => {
         user = state.userInfo.data
     }
 
-    function countSetter(){
+    function countSetter() {
         count = 0
     }
 
-    function handleDblClick(){
+    async function handleKeyDown(event){
+        if (event.key === 'Enter') {
+            let options = {
+                method: 'PUT',
+                url: 'chats/' + props.chatid + '/',
+                data: {
+                    "name": value
+                }
+            }
+            // console.log(options)
+            await request(options);
+            // console.log(value)
+            renameInput.value = ''
+            setName('stuff')
+            props.getData()
+            // console.log(messages)
+        }
+    };
+
+    function handleDblClick(setState) {
         count += 1
-        if (count === 2){
+        if (count === 2) {
             console.log('dbl click')
+            setPage(setState)
+
             count = 0
         }
         setTimeout(countSetter, 200)
@@ -89,10 +112,12 @@ const Profile = () => {
                         </div>
                         <div className="row">
                             <div className="col d-flex justify-content-end mr-0 p-1">
-                                <div title="Double click to edit" onClick={() => handleDblClick()}>{user.first_name}</div>
+                                {page !== 'EditFirstName' && <div title="Double click to edit" onClick={() => handleDblClick('EditFirstName')}>{user.first_name}</div>}
+                                {page === 'EditFirstName' && <input className="nameInput" placeholder={user.first_name} onKeyDown={(event) => handleKeyDown(event)} onChange={(e) => setValue(e.target.value)} />}
                             </div>
                             <div className="col d-flex justify-content-start ml-0 p-1">
-                                <div title="Double click to edit" onClick={() => handleDblClick()}>{user.last_name}</div>
+                                {page !== 'EditLastName' && <div title="Double click to edit" onClick={() => handleDblClick('EditLastName')}>{user.last_name}</div>}
+                                {page === 'EditLastName' && <input className='nameInput' placeholder={user.last_name} onKeyDown={(event) => handleKeyDown(event)} onChange={(e) => setValue(e.target.value)} />}
                             </div>
                         </div>
                         {/* <div>{user.last_name}</div> */}
