@@ -3,7 +3,8 @@ import AuthService from "../../services/auth.service";
 import { useNavigate } from 'react-router-dom';
 import { useGlobalState } from "../../context/GlobalState";
 import jwtDecode from "jwt-decode";
-import './Login.css'
+import './User.css'
+import logo from '/workspace/messaging-app/app/src/images/CHATR/NoBackground/'
 
 const Login = () => {
     let navigate = useNavigate();

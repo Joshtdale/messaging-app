@@ -1,6 +1,6 @@
 .headerNav {
     height: 10vh;
-    background-color: rgba(69, 69, 72, 0.980);
+    background-color: var(--main-grey);
     align-content: center;
 }
 

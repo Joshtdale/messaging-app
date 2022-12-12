@@ -8,10 +8,10 @@
 }
 
 .searchBox {
-    background-color: rgba(0, 0, 0, 0.973);
+    background-color: var(--main-grey);
     border-radius: 20px;
     width: 85vw;
     padding: 2vw;
-    color: white;
+    color: var(--main-cream);
     border: 1px solid #8e8e93;
 }

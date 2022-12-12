@@ -35,7 +35,7 @@ function Home() {
                 url: '/chats',
                 method: 'GET',
             })
-            console.log(chatResp)
+            // console.log(chatResp)
     
             dispatch({
                 ...state,
@@ -68,12 +68,12 @@ function Home() {
         // const channel2 = pusher.subscribe('channel_name2')
         // channel1.bind(`chat_group_${props.page}`,function(data) {
         channel1.bind(`chat_group_${page}`, function (data) {
-            console.log(data)
+            // console.log(data)
             // Code that runs when channel1 listens to a new message
             //props.addMessage(data);
         })
 
-        console.log(channel1);
+        // console.log(channel1);
 
         return (() => {
             pusher.unsubscribe('imclone_channel')
@@ -91,7 +91,6 @@ function Home() {
             // console.log(messages)
         }
     };
-
     async function postData(type, text, chat) {// Master CRUD function
         if (type === 'create-chat') {// Chat create/post
             let options = {
@@ -99,6 +98,11 @@ function Home() {
                 url: 'chats/',
                 data: {
                     "name": text,
+                    "user": [
+                        {
+                            "id": state.currentUser.user_id
+                        }
+                    ]
 
                 }
             }
@@ -131,7 +135,7 @@ function Home() {
         <>
             <div className='container-fluid'>
                 <div className="row justify-content-center">
-                    <div className="col">
+                    <div className="col sticky-top">
                         <HomeNav setPage={setPage} getData={getData} page={page} postData={postData} navigate={navigate} />
                     </div>
                     <div className="row">

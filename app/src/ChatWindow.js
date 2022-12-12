@@ -95,7 +95,7 @@ function ChatWindow() {
 
     return (
         <>
-            <nav className='fixed-top'>
+            <nav className='fixed-top shadow'>
                 <HeaderNav
                     chatid={chatid}
                 />
