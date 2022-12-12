@@ -30,13 +30,13 @@ function Home() {
                 url: '/messages',
                 method: 'GET',
             })
-    
+
             let chatResp = await request({
                 url: '/chats',
                 method: 'GET',
             })
             // console.log(chatResp)
-    
+
             dispatch({
                 ...state,
                 chats: chatResp.data,
@@ -54,7 +54,7 @@ function Home() {
             navigate('/login')
         }
 
-            getData()
+        getData()
 
         // setInterval(getData, 1000)
 
@@ -125,7 +125,7 @@ function Home() {
             let resp = await request(options);
             dispatch({
                 ...state,
-                chats: [ state.chats.filter(c => c.id != chat) ]
+                chats: [state.chats.filter(c => c.id != chat)]
             })
             // getData()
         }
@@ -135,33 +135,38 @@ function Home() {
         <>
             <div className='container-fluid'>
                 <div className="row justify-content-center">
-                    <div className="col sticky-top">
-                        <HomeNav setPage={setPage} getData={getData} page={page} postData={postData} navigate={navigate} />
-                    </div>
-                    <div className="row">
+                    <div className="col">
+                        <div className="row">
+                            <div className="col sticky-top">
+                                <HomeNav setPage={setPage} getData={getData} page={page} postData={postData} navigate={navigate} />
+                            </div>
+                        </div>
+                        {/* <div className="row">
                         <div className="col d-flex justify-content-center">
                             <input id='input' placeholder='Search' className='searchBox' onKeyDown={(event) => handleKeyDown(event)} onChange={(e) => setValue(e.target.value)} />
                         </div>
-                    </div>
-                    {state.chats.map((item) => {
-                        count += 1
-                        return (
-                            <div key={count} className="row">
-                                <div className="col d-flex align-items-center justify-content-center groupChats">
-                                    {/* <div className="row"> */}
-                                    {/* <div className="col-2"> */}
-                                    {/* </div> */}
-                                    {/* <div className="col-8"> */}
-                                    <div onClick={() => navigate(`/msgs/${item.id}`)} className='text-center btn text-light'>{item.name}</div>
-                                    {/* </div> */}
-                                    {/* <div className="col-2"> */}
-                                    {page === 'options' && <img onClick={() => postData('delete', '', item.id)} className='btn chatDelete' src={xButton} alt="X" />}
-                                    {/* </div> */}
-                                    {/* </div> */}
+                    </div> */}
+                        {state.chats.map((item) => {
+                            count += 1
+                            return (
+                                <div key={count} className="row">
+                                    <div className="col d-flex align-items-center justify-content-center groupChats">
+                                        {/* <div className="row"> */}
+                                        {/* <div className="col-2"> */}
+                                        {/* </div> */}
+                                        {/* <div className="col-8"> */}
+                                        <div onClick={() => navigate(`/msgs/${item.id}`)} className='text-center btn text-light'>{item.name}</div>
+                                        {/* </div> */}
+                                        {/* <div className="col-2"> */}
+                                        {page === 'options' && <img onClick={() => postData('delete', '', item.id)} className='btn chatDelete' src={xButton} alt="X" />}
+                                        {/* </div> */}
+                                        {/* </div> */}
+                                    </div>
                                 </div>
-                            </div>
-                        )
-                    })}
+                            )
+                        })}
+                    </div>
+
                 </div>
 
             </div>

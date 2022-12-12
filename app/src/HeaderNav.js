@@ -54,7 +54,7 @@ function HeaderNav(props) {
         setTimeout(countSetter, 200)
     };
 
-    console.log(chatObj)
+    // console.log(chatObj)
 
     return (
         <div className='row headerNav'>

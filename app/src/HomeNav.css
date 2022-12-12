@@ -1,14 +1,21 @@
 .homeNavRow {
-    height: 7vh;
+    height: 10vh;
+    background-color: var(--main-grey);
 }
 
 .editButton {
-    color: #007aff !important;
-    align-items: center;
+    color: var(--main-red) !important;
+    /* align-items: center; */
 }
 
 .createBtn {
-    height: 5vh;
+    height: 6.8vh;
+    padding: 0 !important;
     /* background-image: url('./images/create.png'); */
+}
+
+.profileNavBtn {
+    height: 5vh;
+    padding: 0 !important;
 }
 
