@@ -23,7 +23,6 @@ function Home() {
     const [value, setValue] = useState('')
     const input = document.getElementById('input')
 
-
     async function getData() {
         try {
             let msgResp = await request({
@@ -32,7 +31,7 @@ function Home() {
             })
 
             let chatResp = await request({
-                url: '/chats',
+                url: `/chats/${state.currentUser.user_id}`,
                 method: 'GET',
             })
             // console.log(chatResp)
@@ -130,6 +129,15 @@ function Home() {
             // getData()
         }
     }
+
+    // for (item )
+    // let filteredChats = state.chats.filter((item) => item.user.id.includes(state.currentUser.user_id))
+    // for (item of state.chats){
+    //     for (person of user){
+    //         console.log(id)
+    //     }
+    // }
+console.log('all chats',state.chats)
 
     return (
         <>
