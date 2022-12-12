@@ -1,8 +1,18 @@
+:root {
+    --main-red: #ff5d45;
+    --main-grey: #463c50;
+    --main-cream: #fff7e3;
+}
+
 body {
     font-family: 'Heebo', sans-serif;
-    background-color: black;
-    color: white;
+    background-color: var(--main-grey);
+    color: var(--main-cream);
     /* margin: 0;
     padding: 0;
     font-family: sans-serif; */
 }
+
+/* HEX grey: #463c50
+HEX red: #ff5d45
+HEX cream: #fff7e3 */
