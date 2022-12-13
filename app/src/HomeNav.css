@@ -1,6 +1,6 @@
 .homeNavRow {
-    height: 10vh;
-    background-color: var(--main-grey);
+    height: 13vh;
+    background-color: var(--main-cream);
 }
 
 .editButton {
@@ -17,19 +17,34 @@
 .profileNavBtn {
     height: 5vh;
     padding: 0 !important;
+    margin-top: 7px;
 }
 
 .homeNavBtn {
     background-color: var(--main-red);
     border-radius: 20px;
-    border: 1px solid #8e8e93;
+    /* border: 1px solid #8e8e93; */
     color: var(--main-cream);
-    width: 100px;
+    /* width: 100px; */
     margin: 0px 5px 0px 5px;
+    height: 5vh;
     /* opacity: 0.7; */
 }
 
 .pageRow{
     background-color: var(--main-red);
-    border-radius: 10px;
+    /* border-radius: 10px; */
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.headerLogo {
+    height: 12vh;
+}
+
+.createChat {
+    position: fixed;
+    height: 15vh;
+    top: 85vh;
+    right: -3vh;
 }

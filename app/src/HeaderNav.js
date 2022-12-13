@@ -27,7 +27,7 @@ function HeaderNav(props) {
         if (event.key === 'Enter') {
             let options = {
                 method: 'PUT',
-                url: 'chats/' + props.chatid + '/',
+                url: 'groups/' + props.chatid + '/',
                 data: {
                     "name": value
                 }
@@ -37,7 +37,7 @@ function HeaderNav(props) {
             // console.log(value)
             renameInput.value = ''
             setName('stuff')
-            props.getData()
+            // props.getData()
             // console.log(messages)
         }
     };
@@ -72,7 +72,8 @@ function HeaderNav(props) {
             <div className="col-4 text-center">
                 {name !== 'rename' && <img onClick={() => setName('rename')} className='backButton' src={iButton} alt="i" />}
                 {name === 'rename' && <img onClick={() => setName('cancel')} className='backButton' src={xButton} alt="X" />}
-                <img onClick={() => props.setPage('add')} className='addUser' src={createButton} alt="Add" />
+                {props.page !== 'add' && <img onClick={() => props.setPage('add')} className='addUser' src={createButton} alt="Add" />}
+                {props.page === 'add' && <img onClick={() => props.setPage('chat')} className='addUser' src={xButton} alt="Add" />}
             </div>
         </div>
     )

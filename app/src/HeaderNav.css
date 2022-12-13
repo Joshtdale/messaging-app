@@ -1,7 +1,10 @@
 .headerNav {
     height: 10vh;
-    background-color: var(--main-grey);
+    background-color: var(--main-cream);
+    color: var(--main-grey);
     align-content: center;
+    border-bottom-left-radius: 20px !important;
+    border-bottom-right-radius: 20px !important;
 }
 
 .backButton {
@@ -9,7 +12,7 @@
 }
 
 #renameInput {
-background-color: rgba(0, 0, 0, 0.973);
+background-color: var(--main-grey);
     border-radius: 20px;
     /* width: 95vw; */
     padding: 2vw;

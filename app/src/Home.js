@@ -20,7 +20,7 @@ function Home() {
     // let uniqueChats = chats.map(item => item.chat.name).filter((value, index, self) => self.indexOf(value) === index)
     // console.log(uniqueChats)
     let navigate = useNavigate()
-    const [page, setPage] = useState('chats')
+    const [page, setPage] = useState('Chats')
     const [state, dispatch] = useGlobalState();
     const [value, setValue] = useState('')
     const input = document.getElementById('input')
@@ -107,7 +107,7 @@ function Home() {
         if (type === 'create-chat') {// Chat create/post
             let options = {
                 method: 'post',
-                url: 'chats/',
+                url: 'groups/',
                 data: {
                     "name": text,
                     "user": [
@@ -154,7 +154,7 @@ function Home() {
                 <div key={count} className="row">
                     <div className="col d-flex align-items-center justify-content-center groupChats">
                         <div onClick={() => navigate(`/msgs/${item.id}`)} className='text-center btn text-light'>{item.name}</div>
-                        {page === 'options' && <img onClick={() => postData('delete', '', item.id)} className='btn chatDelete' src={xButton} alt="X" />}
+                        {page === 'Options' && <img onClick={() => postData('delete', '', item.id)} className='btn chatDelete' src={xButton} alt="X" />}
 
                     </div>
                 </div>
@@ -178,9 +178,10 @@ function Home() {
                             <input id='input' placeholder='Search' className='searchBox' onKeyDown={(event) => handleKeyDown(event)} onChange={(e) => setValue(e.target.value)} />
                         </div>
                     </div> */}
-                    {page === 'friends' && <Friends getData={getData} />}
-                    {page === 'makefriends'&& <MakeFriends getData={getData} />}
-                    {page === 'chats' && <Chats />}
+                    {page === 'Friends' && <Friends getData={getData} />}
+                    {page === 'Find Friends'&& <MakeFriends getData={getData} />}
+                    {page === 'Chats' && <Chats />}
+                    {page === 'Options' && <Chats />}
 
                     </div>
 
