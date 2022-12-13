@@ -130,16 +130,16 @@ function Home() {
             // axios.delete(APIUrl + 'chats/' + chat)
             let options = {
                 method: 'DELETE',
-                url: 'chats/' + chat,
+                url: 'groups/' + chat + '/',
 
             }
             // console.log(options)
-            let resp = await request(options);
-            dispatch({
-                ...state,
-                chats: [state.chats.filter(c => c.id != chat)]
-            })
-            // getData()
+            await request(options);
+            // dispatch({
+            //     ...state,
+            //     chats: [state.chats.filter(c => c.id != chat)]
+            // })
+            getData()
         }
     }
 

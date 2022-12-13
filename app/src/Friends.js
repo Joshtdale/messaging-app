@@ -77,18 +77,18 @@ function Friends(props) {
             count += 1
 
             return (
-                <div key={count} className="row friendRow">
-                    <div className="col-4 d-flex align-items-center justify-content-center">
+                <div key={count} className="row friendRow groupChats">
+                    <div className="col-2 d-flex align-items-center justify-content-center">
                         {status === 'Pending...' && <input onClick={() => handleAccept(item.id)} className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />}
                     </div>
-                    <div className="col-4 d-flex align-items-center justify-content-center groupChats">
-                        <div className='text-center btn text-light'>{friend.name} - {friend.username}</div>
+                    <div className="col-8 d-flex align-items-center justify-content-center">
+                        <div className='text-center btn text-light'>{friend.username}🐀</div>
                         {status === 'Pending...' &&
                             <div>{status}</div>
                         }
 
                     </div>
-                    <div className="col-4 d-flex align-items-center justify-content-center">
+                    <div className="col-2 d-flex align-items-center justify-content-center">
                         {status === 'Pending...' && <img onClick={() => handleDecline(item.id)} className='backButton' src={xButton} alt='X' />}
                     </div>
                 </div>

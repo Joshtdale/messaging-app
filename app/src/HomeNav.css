@@ -23,7 +23,7 @@
 .homeNavBtn {
     background-color: var(--main-red);
     border-radius: 20px;
-    /* border: 1px solid #8e8e93; */
+    border: none !important;
     color: var(--main-cream);
     /* width: 100px; */
     margin: 0px 5px 0px 5px;
@@ -44,7 +44,15 @@
 
 .createChat {
     position: fixed;
-    height: 15vh;
-    top: 85vh;
-    right: -3vh;
+    height: 7vh;
+    top: 89vh;
+    right: 4vh;
+    background-color: var(--main-cream) !important;
+    padding: 0 !important;
+    /* border-radius: 30px; */
+}
+
+.findFriendsBtn{
+    /* height: 7vh; */
+    padding: 7px !important;
 }

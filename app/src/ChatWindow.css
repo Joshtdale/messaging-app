@@ -26,6 +26,7 @@
     padding: 2vw;
     color: var(--main-cream);
     border: 1px solid #8e8e93;
+    /* width: 10vw; */
 }
 
 .inputContainer{
