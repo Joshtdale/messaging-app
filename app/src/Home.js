@@ -8,6 +8,8 @@ import Pusher from 'pusher-js';
 import request from './services/api.request'
 import Profile from './components/user/Profile';
 import HeaderNav from './HeaderNav'
+import Friends from './Friends'
+import MakeFriends from './MakeFriends'
 import { useGlobalState } from './context/GlobalState'
 import { useNavigate } from 'react-router-dom'
 
@@ -18,7 +20,7 @@ function Home() {
     // let uniqueChats = chats.map(item => item.chat.name).filter((value, index, self) => self.indexOf(value) === index)
     // console.log(uniqueChats)
     let navigate = useNavigate()
-    const [page, setPage] = useState('')
+    const [page, setPage] = useState('Chats')
     const [state, dispatch] = useGlobalState();
     const [value, setValue] = useState('')
     const input = document.getElementById('input')
@@ -34,12 +36,23 @@ function Home() {
                 url: `/chats/${state.currentUser.user_id}`,
                 method: 'GET',
             })
-            // console.log(chatResp)
+            
+            let friendResp = await request({
+                url: '/friends',
+                method: 'GET',
+            })
+
+            let userResp = await request({
+                url: '/users/',
+                method: 'GET',
+            })
 
             dispatch({
                 ...state,
                 chats: chatResp.data,
                 messages: msgResp.data,
+                friends: friendResp.data,
+                users: userResp.data,
             })
         } catch {
             localStorage.clear()
@@ -94,7 +107,7 @@ function Home() {
         if (type === 'create-chat') {// Chat create/post
             let options = {
                 method: 'post',
-                url: 'chats/',
+                url: 'groups/',
                 data: {
                     "name": text,
                     "user": [
@@ -130,22 +143,33 @@ function Home() {
         }
     }
 
-    // for (item )
-    // let filteredChats = state.chats.filter((item) => item.user.id.includes(state.currentUser.user_id))
-    // for (item of state.chats){
-    //     for (person of user){
-    //         console.log(id)
-    //     }
-    // }
-console.log('all chats',state.chats)
+    let chatList = state.chats
+    // console.log(state.friends)
+
+    function Chats(){
+        return (
+        chatList.map((item) => {
+            count += 1
+            return (
+                <div key={count} className="row">
+                    <div className="col d-flex align-items-center justify-content-center groupChats">
+                        <div onClick={() => navigate(`/msgs/${item.id}`)} className='text-center btn text-light'>{item.name}</div>
+                        {page === 'Options' && <img onClick={() => postData('delete', '', item.id)} className='btn chatDelete' src={xButton} alt="X" />}
+
+                    </div>
+                </div>
+            )
+        })
+        )
+    }
 
     return (
         <>
             <div className='container-fluid'>
                 <div className="row justify-content-center">
                     <div className="col">
-                        <div className="row">
-                            <div className="col sticky-top">
+                        <div className="row sticky-top">
+                            <div className="col">
                                 <HomeNav setPage={setPage} getData={getData} page={page} postData={postData} navigate={navigate} />
                             </div>
                         </div>
@@ -154,25 +178,11 @@ console.log('all chats',state.chats)
                             <input id='input' placeholder='Search' className='searchBox' onKeyDown={(event) => handleKeyDown(event)} onChange={(e) => setValue(e.target.value)} />
                         </div>
                     </div> */}
-                        {state.chats.map((item) => {
-                            count += 1
-                            return (
-                                <div key={count} className="row">
-                                    <div className="col d-flex align-items-center justify-content-center groupChats">
-                                        {/* <div className="row"> */}
-                                        {/* <div className="col-2"> */}
-                                        {/* </div> */}
-                                        {/* <div className="col-8"> */}
-                                        <div onClick={() => navigate(`/msgs/${item.id}`)} className='text-center btn text-light'>{item.name}</div>
-                                        {/* </div> */}
-                                        {/* <div className="col-2"> */}
-                                        {page === 'options' && <img onClick={() => postData('delete', '', item.id)} className='btn chatDelete' src={xButton} alt="X" />}
-                                        {/* </div> */}
-                                        {/* </div> */}
-                                    </div>
-                                </div>
-                            )
-                        })}
+                    {page === 'Friends' && <Friends getData={getData} />}
+                    {page === 'Find Friends'&& <MakeFriends getData={getData} />}
+                    {page === 'Chats' && <Chats />}
+                    {page === 'Options' && <Chats />}
+
                     </div>
 
                 </div>

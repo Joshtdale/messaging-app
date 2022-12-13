@@ -4,6 +4,7 @@ import BackButton from './images/thenounproject.png'
 import iButton from './images/i.png'
 import xButton from './images/x.png'
 import request from './services/api.request'
+import createButton from './images/create.png'
 import { useNavigate } from 'react-router-dom'
 import { useGlobalState } from './context/GlobalState'
 
@@ -26,7 +27,7 @@ function HeaderNav(props) {
         if (event.key === 'Enter') {
             let options = {
                 method: 'PUT',
-                url: 'chats/' + props.chatid + '/',
+                url: 'groups/' + props.chatid + '/',
                 data: {
                     "name": value
                 }
@@ -36,7 +37,7 @@ function HeaderNav(props) {
             // console.log(value)
             renameInput.value = ''
             setName('stuff')
-            props.getData()
+            // props.getData()
             // console.log(messages)
         }
     };
@@ -55,19 +56,24 @@ function HeaderNav(props) {
     };
 
     // console.log(chatObj)
+    // function addUsers(){
+
+    // }
 
     return (
         <div className='row headerNav'>
-            <div className="col-3">
+            <div className="col-4">
                 <img onClick={() => navigate('/msgs')} className='backButton mx-4' src={BackButton} alt="back" />
             </div>
-            <div className="col-6 text-center">
+            <div className="col-4 text-center">
                 {name !== 'rename' && <div onClick={handleDblClick}>{chatObj?.name}</div>}
                 {name === 'rename' && <input id='renameInput' placeholder={chatObj?.name} onKeyDown={(event) => handleKeyDown(event)} onChange={(e) => setValue(e.target.value)} />}
             </div>
-            <div className="col-3 text-center">
+            <div className="col-4 text-center">
                 {name !== 'rename' && <img onClick={() => setName('rename')} className='backButton' src={iButton} alt="i" />}
                 {name === 'rename' && <img onClick={() => setName('cancel')} className='backButton' src={xButton} alt="X" />}
+                {props.page !== 'add' && <img onClick={() => props.setPage('add')} className='addUser' src={createButton} alt="Add" />}
+                {props.page === 'add' && <img onClick={() => props.setPage('chat')} className='addUser' src={xButton} alt="Add" />}
             </div>
         </div>
     )

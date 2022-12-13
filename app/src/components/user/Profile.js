@@ -9,8 +9,9 @@ import profileImg from '/workspace/messaging-app/app/src/images/avatar.png'
 const Profile = () => {
     const [state, dispatch] = useGlobalState();
     const [page, setPage] = useState('')
-    const [inputText, setInputText] = useState('')
-    let navigate = useNavigate()
+    // const [inputText, setInputText] = useState('')
+    const [value, setValue] = useState('')
+    // let navigate = useNavigate()
 
     let user = ''
     let count = 0
@@ -42,20 +43,20 @@ const Profile = () => {
 
     async function handleKeyDown(event){
         if (event.key === 'Enter') {
-            let options = {
-                method: 'PUT',
-                url: 'chats/' + props.chatid + '/',
-                data: {
-                    "name": value
-                }
-            }
-            // console.log(options)
-            await request(options);
-            // console.log(value)
-            renameInput.value = ''
-            setName('stuff')
-            props.getData()
-            // console.log(messages)
+            // let options = {
+            //     method: 'PUT',
+            //     url: 'chats/' + props.chatid + '/',
+            //     data: {
+            //         "name": value
+            //     }
+            // }
+            // // console.log(options)
+            // await request(options);
+            // // console.log(value)
+            // renameInput.value = ''
+            // setName('stuff')
+            // props.getData()
+            // // console.log(messages)
         }
     };
 
@@ -108,6 +109,7 @@ const Profile = () => {
                         <div className="row">
                             <div className="col">
                                 <h3>{user.username}</h3>
+                                <div>Number: {user.id}</div>
                             </div>
                         </div>
                         <div className="row">

@@ -12,7 +12,7 @@ import {
 import Login from './components/user/Login';
 import Register from './components/user/Register';
 import Profile from './components/user/Profile';
-import NavBar from './components/Navbar';
+// import NavBar from './components/Navbar';
 import { GlobalProvider } from './context/GlobalState';
 import Home from './Home';
 import ChatWindow from './ChatWindow';
@@ -20,7 +20,7 @@ import ChatWindow from './ChatWindow';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
-  <React.StrictMode>
+  // <React.StrictMode>
       <GlobalProvider>
 
         <Router>
@@ -36,5 +36,5 @@ root.render(
           </Routes>
         </Router>
       </GlobalProvider>
-  </React.StrictMode>
+  // </React.StrictMode>
 );
