@@ -20,7 +20,7 @@ function Home() {
     // let uniqueChats = chats.map(item => item.chat.name).filter((value, index, self) => self.indexOf(value) === index)
     // console.log(uniqueChats)
     let navigate = useNavigate()
-    const [page, setPage] = useState('')
+    const [page, setPage] = useState('chats')
     const [state, dispatch] = useGlobalState();
     const [value, setValue] = useState('')
     const input = document.getElementById('input')
@@ -144,7 +144,7 @@ function Home() {
     }
 
     let chatList = state.chats
-    console.log(state.friends)
+    // console.log(state.friends)
 
     function Chats(){
         return (
@@ -168,8 +168,8 @@ function Home() {
             <div className='container-fluid'>
                 <div className="row justify-content-center">
                     <div className="col">
-                        <div className="row">
-                            <div className="col sticky-top">
+                        <div className="row sticky-top">
+                            <div className="col">
                                 <HomeNav setPage={setPage} getData={getData} page={page} postData={postData} navigate={navigate} />
                             </div>
                         </div>
@@ -179,8 +179,8 @@ function Home() {
                         </div>
                     </div> */}
                     {page === 'friends' && <Friends getData={getData} />}
-                    {page === 'makefriends'&& <MakeFriends />}
-                    {page !== 'friends' && <Chats />}
+                    {page === 'makefriends'&& <MakeFriends getData={getData} />}
+                    {page === 'chats' && <Chats />}
 
                     </div>
 

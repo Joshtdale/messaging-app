@@ -16,3 +16,7 @@ background-color: rgba(0, 0, 0, 0.973);
     color: white;
     border: 1px solid #8e8e93;
 }
+
+.addUser {
+    height: 7vh;
+}

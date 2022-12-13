@@ -15,6 +15,7 @@ const initialState = {
     chats: [],
     friends: [],
     users: [],
+    myRelationships: [],
 }
 
 const GlobalStateContext = createContext(initialState);

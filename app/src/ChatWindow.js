@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom';
 import { useGlobalState } from './context/GlobalState';
 import request from './services/api.request';
 import HeaderNav from './HeaderNav';
+import createButton from './images/create.png'
 
 function ChatWindow() {
     let { chatid } = useParams();
@@ -13,6 +14,7 @@ function ChatWindow() {
     const bottomRef = useRef(null);
     const [value, setValue] = useState('')
     const [sendWatcher, setSendWatcher] = useState(false)
+    const [page, setPage] = useState('chat')
     // const [messageState, setMessage] = useState
 
     let filteredMessages = state.messages.filter((item) => item.chat.id == chatid)
@@ -117,38 +119,73 @@ function ChatWindow() {
         
     }
 
+    function Messages(){
+        return (
+            <>
+            {filteredMessages.map((item) => {
+                mapKey += 1
+                // console.log(item.user.id)
+                let messageClass = 'sent'
+                let nameClass = 'sentName'
+                let sentRec = 'd-flex flex-row-reverse'
+                if (item.user.id !== state.currentUser.user_id) {
+                    messageClass = 'received'
+                    nameClass = 'receivedName'
+                    sentRec = ''
+                }
+                return (
+                    <div key={mapKey} className={sentRec + ' chatBody row w-100'}>
+                        <div className={' messageContainer col-9 p-1 mt-2'}>
+                            <div className={nameClass}>{item.user.name}🐀</div>
+                            <div className={messageClass}>{item.text}</div>
+                            {/* {console.log(item.user)} */}
+                        </div>
+                    </div>
+                )
+            })}
+            <div className='divRef' ref={bottomRef} />
+        
+        </>
+        )
+    }
+
+    function Users(){
+        return (
+            <>
+            {state.users.map((item) => {
+                mapKey += 1
+
+                return (
+                    <div key={mapKey} className='row w-100'>
+                    <div className="col-6 d-flex align-items-center justify-content-center">
+                        <img className='createBtn' src={createButton} alt="Add" />
+                    </div>
+                    <div className="col-6 d-flex align-items-center justify-content-center">
+                        <div className='text-center btn text-light'>{item.first_name} - {item.username}</div>
+
+                    </div>
+                    </div>
+                )
+            })}
+            <div className='divRef' ref={bottomRef} />
+        
+        </>
+        ) 
+    }
 
     return (
         <>
             <nav className='fixed-top shadow'>
                 <HeaderNav
                     chatid={chatid}
+                    setPage={setPage}
+                    page={page}
                 />
             </nav>
             <div className='container-fluid chatContainer'>
                 <div id='chat' className='chatWindow d-flex align-items-end justify-content-center row'>
-                    {filteredMessages.map((item) => {
-                        mapKey += 1
-                        // console.log(item.user.id)
-                        let messageClass = 'sent'
-                        let nameClass = 'sentName'
-                        let sentRec = 'd-flex flex-row-reverse'
-                        if (item.user.id !== state.currentUser.user_id) {
-                            messageClass = 'received'
-                            nameClass = 'receivedName'
-                            sentRec = ''
-                        }
-                        return (
-                            <div key={mapKey} className={sentRec + ' chatBody row w-100'}>
-                                <div className={' messageContainer col-9 p-1 mt-2'}>
-                                    <div className={nameClass}>{item.user.name}🐀</div>
-                                    <div className={messageClass}>{item.text}</div>
-                                    {/* {console.log(item.user)} */}
-                                </div>
-                            </div>
-                        )
-                    })}
-                    <div className='divRef' ref={bottomRef} />
+                    {page === 'chat' && <Messages />}
+                    {page === 'add' && <User />}
                 </div>
                 <div className='row fixed-bottom'>
                     <div className="col d-flex justify-content-center m-2 pl-0">

@@ -39,16 +39,17 @@ function Friends(props) {
     let count = 0
     const [state, dispatch] = useGlobalState();
     // console.log(state.currentUser.friends)
+    console.log(state.friends)
     let relationship = state.friends.filter((item) =>
         item.user.id === state.currentUser.user_id ||
         item.requestedUser.id === state.currentUser.user_id)
-    // console.log(relationship)
+    console.log(relationship)
     return (
         relationship.map((item) => {
             let friend = {}
             let status = ''
             // console.log(item.id)
-            if (state.currentUser.user_id === item.requestedUser.id || state.currentUser.user_id === item.user.id) {
+            // if (state.currentUser.user_id === item.requestedUser.id || state.currentUser.user_id === item.user.id) {
                 if (item.user !== state.currentUser.user_id) {
 
                     friend = item.user
@@ -60,7 +61,8 @@ function Friends(props) {
                         status = 'Accepted'
                     }
 
-                } else if (item.requestedUser.id !== state.currentUser.user_id) {
+                }
+                if (item.requestedUser.id !== state.currentUser.user_id) {
 
                     friend = item.requestedUser
 
@@ -70,7 +72,7 @@ function Friends(props) {
                         status = 'Declined'
                     }
                 }
-            }
+            // }
 
             count += 1
 
