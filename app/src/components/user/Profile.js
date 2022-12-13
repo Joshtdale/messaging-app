@@ -88,7 +88,7 @@ const Profile = () => {
         //     }
         // }
     };
-
+// console.log(state.chats.length)
 
     return (
         <>
@@ -103,13 +103,13 @@ const Profile = () => {
                     <div className="col">
                         <div className="row">
                             <div className="col">
-                                <img className="rounded-circle profileImg" src={profileImg} alt="Profile Image" />
+                                <img className="rounded-circle profileImg m-3" src={profileImg} alt="Profile" />
                             </div>
                         </div>
                         <div className="row">
                             <div className="col">
                                 <h3>{user.username}</h3>
-                                <div>Number: {user.id}</div>
+                                <div>Current Chats: {state.chats.length}</div>
                             </div>
                         </div>
                         <div className="row">

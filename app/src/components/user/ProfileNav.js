@@ -14,7 +14,7 @@ function ProfileNav() {
 
     let navigate = useNavigate()
     return (
-        <div className='row homeNavRow d-flex align-items-center vw-100'>
+        <div className='row homeNavRow headerNav d-flex align-items-center vw-100'>
 
             <div className="col-4 text-center">
                 {/* {props.page !== 'options' && <button onClick={() => props.setPage('options')} className='editButton btn'>Edit</button>} */}
@@ -30,6 +30,11 @@ function ProfileNav() {
                 {/* {props.page !== 'options' && <img onClick={() => navigate('/profile')} className='createBtn btn' src={profile} alt='Profile'></img>} */}
                 <button onClick={Logout} className="btn btn-secondary m-2 signInBtn">Logout</button>
             </div>
+            {/* <div className="row pageRow">
+                <div className="col-12">
+
+                </div>
+            </div> */}
 
         </div>
     )
