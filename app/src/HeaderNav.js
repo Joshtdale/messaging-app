@@ -73,7 +73,7 @@ function HeaderNav(props) {
                 {name !== 'rename' && <img onClick={() => setName('rename')} className='backButton' src={iButton} alt="i" />}
                 {name === 'rename' && <img onClick={() => setName('cancel')} className='backButton' src={xButton} alt="X" />}
                 {props.page !== 'add' && <img onClick={() => props.setPage('add')} className='addUser' src={createButton} alt="Add" />}
-                {props.page === 'add' && <img onClick={() => props.setPage('chat')} className='addUser' src={xButton} alt="Add" />}
+                {props.page === 'add' && <img onClick={() => props.setPage('chat')} className='backButton' src={xButton} alt="Add" />}
             </div>
         </div>
     )
