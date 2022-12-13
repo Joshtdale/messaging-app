@@ -91,3 +91,12 @@
 .divRef {
     height: 2vh;
 }
+
+.doneBtn {
+    background-color: var(--main-red) !important;
+    border-radius: 20px !important;
+    /* border: 1px solid #8e8e93; */
+    color: var(--main-grey) !important;
+    /* width: 100px; */
+    /* margin: 0px 5px 0px 5px; */
+}

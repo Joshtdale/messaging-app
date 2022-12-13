@@ -122,8 +122,12 @@ function ChatWindow() {
 
     let memberCount = 0
 
+    
+
     async function SetChatMembers() {
-        let map = chatMembers.map((item) => {
+        const unique = [...new Set(chatMembers)]
+        // console.log(unique)
+        let map = unique.map((item) => {
             return(
                 {
                     "id": item
@@ -144,20 +148,29 @@ function ChatWindow() {
         // renameInput.value = ''
         // setName('stuff')
         // props.getData()
-        memberCount = 0
+        setPage('not')
     }
 
 // console.log(state.chats)
     function addUser(id) {
-        console.log(count)
-        if (memberCount === 0) {
-            setChatMembers(...chatMembers, state.currentUser.user_id)
-        }
-
-        // let oldMembers = chatMembers
+        // console.log(memberCount)
+        // if (memberCount === 0) {
+        //     console.log('aaaaaaaaaaa')
+        //     setChatMembers(...chatMembers, state.currentUser.user_id)
+        //     memberCount += 1
+        // }
+        
+        // let oldMembers = ...chatMembers
         // setChatMembers([...chatMembers, state.currentUser.user_id])
-        setChatMembers([...chatMembers, id])
-        memberCount += 1
+        
+        // LOOP through chatMembers array
+        // IF current user exists, return setChatMembers([...chatMembers, id)
+        // ELSE return setChatMembers([...chatMembers, id, state.currentUser.user_id])
+        // memberCount += 1
+        
+        setChatMembers([...chatMembers, id, state.currentUser.user_id])
+        console.log(memberCount)
+        
         // console.log(id)
         // let options = {
         //     method: 'PUT',
@@ -234,7 +247,7 @@ function ChatWindow() {
                 })}
                 {/* <div className='divRef' ref={bottomRef} /> */}
                 <div className="row">
-                    <div className="col">
+                    <div className="col d-flex justify-content-center align-items-center">
                         <button onClick={() => SetChatMembers()} className='btn doneBtn'>Done</button>
                     </div>
                 </div>
