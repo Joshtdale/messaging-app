@@ -1,8 +1,10 @@
 import React, { useState } from "react"
 import AuthService from "../../services/auth.service";
 import logo from '../../images/CHATR/NoBackground/Logobubblebackground.png'
+import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
+    let navigate = useNavigate();
     const [user, setUser] = useState({
         username: "",
         password: "",
@@ -11,17 +13,19 @@ const Register = () => {
         lastName: "",
         email: "",
     })
-
+    
     const handleChange = (key, value) => {
         setUser({
             ...user,
             [key]: value
         })
     }
-
+    
     const handleRegister = (e) => {
         e.preventDefault();
         AuthService.register(user)
+        console.log(user)
+        navigate('/login')
     }
 
     return (

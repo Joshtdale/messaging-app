@@ -149,6 +149,7 @@ function ChatWindow() {
 
 // console.log(state.chats)
     function addUser(id) {
+        console.log(count)
         if (memberCount === 0) {
             setChatMembers(...chatMembers, state.currentUser.user_id)
         }
