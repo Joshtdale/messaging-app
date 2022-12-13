@@ -13,6 +13,9 @@ const initialState = {
     currentUserToken: user ? user.access : null,
     messages: [],
     chats: [],
+    friends: [],
+    users: [],
+    myRelationships: [],
 }
 
 const GlobalStateContext = createContext(initialState);

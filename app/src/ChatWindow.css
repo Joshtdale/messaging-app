@@ -28,6 +28,14 @@
     border: 1px solid #8e8e93;
 }
 
+.inputContainer{
+    background-color: var(--main-cream);
+    /* border-top-left-radius: 25px !important;
+    border-top-right-radius: 25px !important; */
+    border-radius: 50px;
+    /* height: 7vh; */
+}
+
 .messageContainer {
     width: 80%;
 }
