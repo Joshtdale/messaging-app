@@ -61,7 +61,7 @@ function HeaderNav(props) {
     // }
 
     return (
-        <div className='row headerNav'>
+        <div className='row headerNav d-flex justify-content-center align-items-center'>
             <div className="col-4">
                 <img onClick={() => navigate('/msgs')} className='backButton mx-4' src={BackButton} alt="back" />
             </div>

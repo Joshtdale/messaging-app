@@ -1,4 +1,4 @@
-import { React,useState } from 'react'
+import { React,useState, useEffect } from 'react'
 import './HomeNav.css'
 import createButton from './images/create.png'
 import profile from './images/profile.png'
@@ -11,6 +11,20 @@ import headLogo from './images/CHATR/NoBackground/Logo3.png'
 
 function HomeNav(props) {
     // const [page, setPage] = useState('')
+    const friendBtn = document.getElementById('friendBtn')
+    const chatBtn = document.getElementById('chatBtn')
+    // useEffect(() => {
+        if (friendBtn){
+        if(props.page === 'Friends'){
+            friendBtn.disabled = true;
+            chatBtn.disabled = false;
+        }
+        if (props.page === 'Chats'){
+            friendBtn.disabled = false;
+            chatBtn.disabled = true;
+        }
+    }
+    // }, [])
 
     let navigate = useNavigate()
     return (
@@ -27,24 +41,24 @@ function HomeNav(props) {
                 </div>
 
                 <div className="col-3 text-center createBtn">
-                    <img onClick={() => props.postData('create-chat', 'New chat')} className='createChat btn' src={createButton} alt='Create'></img>
+                {props.page === 'Chats' && <img onClick={() => props.postData('create-chat', 'New chat')} className='createChat btn rounded-circle' src={createButton} alt='Create'></img>}
                     {props.page !== 'Options' && <img onClick={() => navigate('/profile')} className='profileNavBtn btn' src={profile} alt='Profile'></img>}
                 </div>
 
             </div>
         <div className="row pageRow d-flex justify-content-center align-items-center">
             <div className="col-4 text-center">
-                <button onClick={() => props.setPage('Friends')} className='btn homeNavBtn'>Friends</button>
+                <button id='friendBtn' onClick={() => props.setPage('Friends')} className='btn homeNavBtn'>Friends</button>
                 
 
             </div>
             <div className="col-4 text-center">
-            <button onClick={() => props.setPage('Chats')} className='btn homeNavBtn'>Chats</button>
+            <button id='chatBtn' onClick={() => props.setPage('Chats')} className='btn homeNavBtn'>Chats</button>
             </div>
-            <div className="col-4 text-center">
-                <img src={addFriends} onClick={() => props.setPage('Find Friends')} className=' homeNavBtn'/>
-            </div>
+            {/* <div className="col-4 text-center">
+            </div> */}
         </div>
+                {props.page === 'Friends' && <img src={addFriends} onClick={() => props.setPage('Find Friends')} className='createChat btn rounded-circle findFriendsBtn'/>}
         </div>
             )
 }

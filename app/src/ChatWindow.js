@@ -120,6 +120,7 @@ function ChatWindow() {
 
     }
 
+    let memberCount = 0
 
     async function SetChatMembers() {
         let map = chatMembers.map((item) => {
@@ -143,13 +144,19 @@ function ChatWindow() {
         // renameInput.value = ''
         // setName('stuff')
         // props.getData()
+        memberCount = 0
     }
 
 // console.log(state.chats)
     function addUser(id) {
+        if (memberCount === 0) {
+            setChatMembers(...chatMembers, state.currentUser.user_id)
+        }
+
         // let oldMembers = chatMembers
         // setChatMembers([...chatMembers, state.currentUser.user_id])
         setChatMembers([...chatMembers, id])
+        memberCount += 1
         // console.log(id)
         // let options = {
         //     method: 'PUT',
@@ -169,6 +176,7 @@ function ChatWindow() {
     }
 
     console.log(chatMembers)
+    console.log(state.chats)
 
     function Messages() {
         return (
