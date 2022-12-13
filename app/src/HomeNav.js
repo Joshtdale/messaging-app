@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom'
 
 
 function HomeNav(props) {
-    const [page, setPage] = useState('')
+    // const [page, setPage] = useState('')
     let navigate = useNavigate()
     return (
         <>
@@ -31,10 +31,10 @@ function HomeNav(props) {
             </div>
         <div className="row">
             <div className="col">
-                {/* <button onClick={() => } className='btn homeNavBtn'>Friends</button> */}
+                {props.page !== 'friends' && <button onClick={() => props.setPage('friends')} className='btn homeNavBtn'>Friends</button>}
             </div>
             <div className="col">
-                <button className='btn homeNavBtn'>Find</button>
+                <button onClick={() => props.setPage('makefriends')} className='btn homeNavBtn'>Find</button>
             </div>
         </div>
         </>
