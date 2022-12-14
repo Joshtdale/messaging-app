@@ -5,7 +5,7 @@
 For this project I decided to clone iMessage. 
 
 Why a messaging app? <br>
-To be honest, I this was not 
+To be honest, this was not 
 my first choice solely because it scared me. The thought of having to figure out how to copy 
 one of the most well know applications on the planet was extremely intimidating. Yet it's those very 
 reasons that convinced me I needed to do it. I knew getting out of my comfort zone would be the best 
