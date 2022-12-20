@@ -64,13 +64,13 @@ function ChatWindow() {
         bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
         // console.log('scroll working')
     }
-    const pusher = new Pusher(process.env.REACT_APP_PUSHER_KEY, {
-        // const pusher = new Pusher('1fb64f027f5f40e81a79', {
-        cluster: process.env.REACT_APP_CLUSTER
+    // const pusher = new Pusher(process.env.REACT_APP_PUSHER_KEY, {
+        const pusher = new Pusher('1fb64f027f5f40e81a79', {
+        cluster: "us2"
     })
     useEffect(() => { //https://bobbyhadz.com/blog/react-scroll-to-bottom
         // console.log(process.env.REACT_APP_PUSHER_KEY)
-        const channel1 = pusher.subscribe(process.env.REACT_APP_PUSHER_CHANNEL);
+        const channel1 = pusher.subscribe("imclone_channel");
         // You can bind more channels here like this
         // const channel2 = pusher.subscribe('channel_name2')
         channel1.bind(`chat_group_${chatid}`, function (data) {
@@ -82,7 +82,7 @@ function ChatWindow() {
         // console.log(channel1)
 
         return (() => {
-            pusher.unsubscribe(process.env.REACT_APP_PUSHER_CHANNEL)
+            pusher.unsubscribe("imclone_channel")
             // pusher.unsubscribe('channel_name2')
         })
         // }, [state.messages]);
